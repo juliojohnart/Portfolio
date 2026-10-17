@@ -31,3 +31,13 @@ Galerias em WebP, com versões de 800 e 1600 pixels, e animação em MP4 local. 
 - Consumer Loyalty (3 pranchas): https://juliojohn.com/projects/Nqb9kg
 
 As imagens ficam em `w/` e o vídeo em `media/`.
+
+## Rodar localmente
+
+Com Node.js instalado, execute `node serve.cjs` nesta pasta e abra http://localhost:4173.
+O servidor suporta requisições HTTP Range para avançar e retroceder nos vídeos.
+
+## Mídia dos jogos
+
+- TWVC: animação do personagem em MP4 local e modelo 3D interativo do Sketchfab (requer internet). Fonte: https://juliojohn.com/projects/nJmEzo
+- Hack&Lock: dois vídeos de gameplay em MP4 local, ao final da galeria. Fonte: https://juliojohn.com/projects/qJdW1y
