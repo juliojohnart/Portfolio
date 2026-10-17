@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explorações visuais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<style>
+:root{--ground:#1d1d21;--raised:#26262c;--rule:#36363d;--text:#eeece7;--dim:#a6a49e;--f:"Archivo",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--text);font:16px/1.6 var(--f);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:0 auto;padding:56px 20px 72px}
+h1{margin:0 0 12px;font-weight:800;font-stretch:125%;font-size:clamp(32px,5vw,56px);line-height:1;letter-spacing:-.025em}
+.lede{margin:0 0 40px;color:var(--dim);font-size:18px;max-width:60ch}
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.list a{display:grid;grid-template-columns:3.2em minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:inherit}
+.list b{font-weight:800;font-stretch:125%;font-size:15px;color:var(--dim)}
+.list strong{display:block;font-weight:700;font-stretch:125%;font-size:clamp(22px,3vw,30px);line-height:1.1}
+.list p{margin:6px 0 0;color:var(--dim);max-width:62ch}
+.list span{color:var(--dim);font-size:14px;white-space:nowrap}
+.list a:hover strong{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px}
+.note{margin-top:36px;color:var(--dim);font-size:15px;max-width:66ch}
+@media (max-width:600px){.list a{grid-template-columns:2.4em minmax(0,1fr)}.list span{grid-column:2}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>Explorações visuais</h1>
+  <p class="lede">Três direções para o portfólio, todas com o mesmo conteúdo e o mesmo layout. Abra cada uma, passe o mouse nos projetos, troque o filtro, entre num case e redimensione a janela.</p>
+  <ul class="list">
+    <li><a href="index.html"><b>00</b><div><strong>Atual</strong><p>A versão publicada hoje, para comparar.</p></div><span>sem mudanças</span></a></li>
+    <li><a href="explore-a.html"><b>A</b><div><strong>Signal</strong><p>Grade de pontos no fundo com uma onda diagonal lenta; os pontos reagem ao cursor e assumem a cor do case aberto. Spotlight na capa dos projetos e o título da home sobe palavra por palavra na primeira visita.</p></div><span>canvas leve</span></a></li>
+    <li><a href="explore-b.html"><b>B</b><div><strong>Ambient</strong><p>Manchas de cor suaves derivando no fundo, com grão fino. Passar o mouse num projeto puxa o ambiente para a cor dele; a página do case assume a paleta. Capas inclinam levemente e um letreiro de habilidades corre embaixo da introdução.</p></div><span>só CSS</span></a></li>
+    <li><a href="explore-c.html"><b>C</b><div><strong>HUD</strong><p>Linguagem de menu de jogo: grade quadriculada com parallax, células que acendem sob o cursor e piscam de vez em quando, cantoneiras de mira nas capas e pranchas, rótulo que "decodifica" no hover e um cursor piscando no título.</p></div><span>canvas leve</span></a></li>
+  </ul>
+  <p class="note">Em todas: indicador do filtro que desliza entre as abas e o botão "Copy email" confirma no próprio botão. Movimento pausa com a aba em segundo plano, some com "reduzir movimento" do sistema e o efeito de cursor só liga em mouse. Se algum efeito falhar no navegador, o site aparece igual ao atual.</p>
+</main>
+</body>
+</html>
