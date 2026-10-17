@@ -55,10 +55,6 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 .head.open{background:var(--ground)}
 .head .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
 .mark{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:750;font-size:18px;font-stretch:112%;letter-spacing:-.01em;min-width:0}
-.mark i{flex:none;width:9px;height:9px;border-radius:50%;background:#7db4ff;box-shadow:0 0 8px currentColor;color:#7db4ff;animation:dot 16s linear infinite;transition:transform .3s var(--ease)}
-.mark:hover i{transform:scale(1.35)}
-.on-case .mark i{animation:none;background:var(--ink);color:var(--ink)}
-@keyframes dot{0%,100%{background:#7db4ff;color:#7db4ff}25%{background:#ff7cbd;color:#ff7cbd}50%{background:#4ff0b4;color:#4ff0b4}75%{background:#ffc94d;color:#ffc94d}}
 .mark small{font-weight:500;font-size:14px;font-stretch:100%;letter-spacing:0;color:var(--dim);padding-left:12px;border-left:1px solid var(--rule);white-space:nowrap}
 @media (max-width:900px){.mark small{display:none}}
 .nav{display:flex;align-items:center;gap:28px;font-size:15px}
@@ -275,7 +271,7 @@ body{background:transparent}
 <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div><div class="grain" aria-hidden="true"></div>
 <header class="head">
   <div class="wrap bar">
-    <a class="mark" href="#work"><i aria-hidden="true"></i>Júlio John<small>Visual and UX/UI Designer</small></a>
+    <a class="mark" href="#work">Júlio John<small>Visual and UX/UI Designer</small></a>
     <nav class="nav" aria-label="Main">
       <a href="#work" data-nav="work">Work</a>
       <a href="#about" data-nav="about">About</a>
@@ -639,7 +635,7 @@ let current=null;
 function render(id){
   const p=P.find(x=>x.id===id);
   closeDrawer();if(viewer.open)viewer.close();
-  onCase=!!p;bar.style.transform="scaleX(0)";root.classList.toggle("on-case",onCase);
+  onCase=!!p;bar.style.transform="scaleX(0)";
   if(!p){root.style.setProperty("--ink","#eeece7");root.style.setProperty("--band","#26262c")}
   document.querySelectorAll("[data-nav]").forEach(a=>{const on=(a.dataset.nav==="about")===(id==="about");on?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current")});
   /* A content error in one case must never leave a blank or stuck page: fall back to the home list */
