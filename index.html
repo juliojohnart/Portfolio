@@ -85,8 +85,8 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 .group-head h2{margin:0;font-weight:700;font-stretch:112%;font-size:25px;line-height:1.2;letter-spacing:-.01em}
 
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:44px 24px}
-.grid.product{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media (max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.grid.product{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1000px){.grid,.grid.product{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){.grid{gap:28px 14px}.grid.product{grid-template-columns:1fr}}
 
 .item{display:flex;flex-direction:column;gap:14px;text-decoration:none;min-width:0}
@@ -146,13 +146,12 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 .play-button img{width:30px;height:30px;object-fit:contain;flex:none}
 @media (max-width:860px){.story{grid-template-columns:1fr;gap:26px}}
 
-.boards{display:flex;flex-direction:column;gap:64px;align-items:center}
+.boards{display:flex;flex-direction:column;gap:64px;align-items:stretch;width:100%;max-width:960px;margin-inline:auto}
 .board{margin:0;width:100%;display:flex;flex-direction:column;align-items:center;gap:14px}
 .board button{all:unset;cursor:zoom-in;display:block;width:100%;position:relative}
 .board button:focus-visible{outline:2px solid var(--text);outline-offset:4px}
-.board.tall button{max-width:620px}
 .board img{width:100%;height:auto;background:var(--raised)}
-.board figcaption{width:100%;max-width:760px;display:grid;grid-template-columns:2.2em minmax(0,1fr);gap:10px;color:var(--dim);font-size:15px;line-height:1.5}
+.board figcaption{width:100%;display:grid;grid-template-columns:2.2em minmax(0,1fr);gap:10px;color:var(--dim);font-size:15px;line-height:1.5}
 .board figcaption b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
 .board figcaption strong{color:var(--text);font-weight:600}
 .board figcaption > span:only-child{grid-column:1/-1}
@@ -307,7 +306,7 @@ body{background:transparent}
     <div class="email"><code id="mail">julio_john@hotmail.com.br</code><button type="button" data-copy>Copy email</button></div>
     <div class="inline-links" style="margin-bottom:48px">
       <a class="link social-link" href="https://www.linkedin.com/in/juliojohn" target="_blank" rel="noopener"><img src="icons/linkedin.svg" alt="" width="19" height="19">LinkedIn</a>
-      <a class="link" href="https://juliojohn.itch.io" target="_blank" rel="noopener">Playable games on itch.io</a>
+      <a class="link social-link" href="https://juliojohn.itch.io" target="_blank" rel="noopener"><img src="icons/itchio.svg" alt="" width="19" height="19">Playable games on itch.io</a>
     </div>
     <div class="foot"><span>Júlio John © All rights reserved</span><span>Visual Designer at Wildlife Studios</span></div>
   </div>
@@ -474,10 +473,41 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 const img=(base,w)=>w>900?{src:`w/${base}-800.webp`,set:`w/${base}-800.webp 800w, w/${base}-${w}.webp ${w}w`}:{src:`w/${base}-${w}.webp`,set:""};
 function mediaAfter(p,index){
   const models=(p.models||[]).filter(m=>m.after===index).map(m=>`<figure class="board"><iframe src="${m.src}" title="${esc(m.title)}" loading="lazy" allow="fullscreen; xr-spatial-tracking" allowfullscreen></iframe><figcaption><span><strong>${esc(m.title)}.</strong> Explore the original interactive model on Sketchfab.</span></figcaption></figure>`);
-  const videos=(p.videos||[]).filter(v=>v.after===index).map(v=>`<figure class="board"><video controls playsinline preload="metadata" width="${v.width}" height="${v.height}" aria-label="${esc(v.title)}"><source src="${v.src}" type="video/mp4">Your browser does not support video playback. <a href="${v.src}">Download the video</a>.</video><figcaption><span><strong>${esc(v.title)}.</strong> ${esc(v.caption)}</span></figcaption></figure>`);
+  const videos=(p.videos||[]).filter(v=>v.after===index).map(v=>`<figure class="board"><video controls muted playsinline preload="metadata" width="${v.width}" height="${v.height}" aria-label="${esc(v.title)}"><source src="${v.src}" type="video/mp4">Your browser does not support video playback. <a href="${v.src}">Download the video</a>.</video><figcaption><span><strong>${esc(v.title)}.</strong> ${esc(v.caption)}</span></figcaption></figure>`);
   return models.concat(videos).join("");
 }
 const reduce=matchMedia("(prefers-reduced-motion: reduce)");
+let stopVideoPlayback=()=>{};
+function watchVideos(){
+  if(reduce.matches||!('IntersectionObserver' in window))return;
+  const states=new Map();
+  let active=true;
+  const play=(video,state)=>{
+    if(active&&state.visible&&!state.userPaused&&!document.hidden&&!video.ended)video.play().catch(()=>{});
+  };
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      const video=entry.target,state=states.get(video);
+      state.visible=entry.isIntersecting&&entry.intersectionRatio>=.35;
+      if(state.visible)play(video,state);
+      else{state.userPaused=false;video.pause();}
+    });
+  },{threshold:[0,.35]});
+  app.querySelectorAll('video').forEach(video=>{
+    const state={visible:false,userPaused:false};states.set(video,state);
+    video.addEventListener('pause',()=>{
+      if(active&&state.visible&&!document.hidden&&!video.ended)state.userPaused=true;
+    });
+    video.addEventListener('play',()=>{state.userPaused=false;});
+    observer.observe(video);
+  });
+  const visibility=()=>states.forEach((state,video)=>document.hidden?video.pause():play(video,state));
+  document.addEventListener('visibilitychange',visibility);
+  stopVideoPlayback=()=>{
+    active=false;observer.disconnect();document.removeEventListener('visibilitychange',visibility);
+    states.forEach((state,video)=>video.pause());
+  };
+}
 function card(p,i,product){
   const preview=product?(p.preview||p.boards[0]):p.cover;
   const t={base:preview[0],w:preview[1]};
@@ -500,9 +530,9 @@ function home(){
     <h1>Interfaces for games and digital products.</h1>
     <p>I'm <b>Júlio John</b>, a visual and UX/UI designer with 7+ years across mobile, PC and VR, currently a Visual Designer on Zooba at Wildlife Studios. Before that, iFood and Instituto de Pesquisas Eldorado.</p>
     <div class="inline-links">
-      <button type="button" class="link" data-copy>Copy email</button>
       <a class="link social-link" href="https://www.linkedin.com/in/juliojohn" target="_blank" rel="noopener"><img src="icons/linkedin.svg" alt="" width="19" height="19">LinkedIn</a>
       <a class="link" href="#about">About me</a>
+      <button type="button" class="link" data-copy>Copy email</button>
     </div>
   </section>
   <section class="wrap group" aria-labelledby="g-games">
@@ -575,6 +605,7 @@ function project(p){
   <a class="side prev" href="#${prev.id}" aria-label="Previous case: ${esc(prev.name)}" title="Previous: ${esc(prev.name)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></a>
   <a class="side nxt" href="#${next.id}" aria-label="Next case: ${esc(next.name)}" title="Next: ${esc(next.name)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></a>`;
   app.querySelectorAll("[data-zoom]").forEach(b=>b.addEventListener("click",()=>openViewer(b.dataset.zoom,b.dataset.cap)));
+  watchVideos();
 }
 
 const XP=[
@@ -613,6 +644,9 @@ function about(){
     <div>
       <p class="intro">I'm <b>Júlio John</b>, a visual and UX/UI designer with 7+ years across mobile, PC and VR. Today I'm a Visual Designer on Zooba at Wildlife Studios.</p>
       <p class="intro">Before that I led UI/UX and art direction for educational games at Instituto de Pesquisas Eldorado, designed growth and loyalty products at iFood, and started at the Apple Developer Academy.</p>
+      <div class="inline-links" style="margin-top:20px">
+        <a class="link social-link" href="https://www.linkedin.com/in/juliojohn" target="_blank" rel="noopener"><img src="icons/linkedin.svg" alt="" width="19" height="19">Full resume on LinkedIn</a>
+      </div>
 
       <h2>Experience</h2>
       <ol class="timeline">
@@ -656,10 +690,6 @@ function about(){
         <li><img src="icons/layer.png" alt="" width="30" height="30">Layer AI</li>
       </ul>
 
-      <div class="inline-links" style="margin-top:36px">
-        <a class="link social-link" href="https://www.linkedin.com/in/juliojohn" target="_blank" rel="noopener"><img src="icons/linkedin.svg" alt="" width="19" height="19">Full resume on LinkedIn</a>
-        <button type="button" class="link" data-copy>Copy email</button>
-      </div>
     </div>
   </section>`;
 }
@@ -694,6 +724,7 @@ addEventListener("scroll",()=>{if(!onCase||tick)return;tick=true;requestAnimatio
 /* Routing with an optional shared-element morph */
 let current=null;
 function render(id){
+  stopVideoPlayback();stopVideoPlayback=()=>{};
   const p=P.find(x=>x.id===id);
   root.classList.toggle("case-view",!!p);
   closeDrawer();if(viewer.open)viewer.close();
