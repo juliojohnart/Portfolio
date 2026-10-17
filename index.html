@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
 <style>
-/* Layout: quiet graphite chrome so the colorful game boards carry the page. Home = left-aligned statement, one featured case in a wide row, then a 2-column list. Each case takes its own project color for one full-bleed summary band and the "next case" block; everything else stays neutral. One family (Archivo) in two widths: expanded for display, normal for reading. Motion = one native shared-element morph from thumbnail to case header (View Transitions), nothing on scroll. */
+/* Layout: quiet graphite chrome so the colorful game boards carry the page. Home = left-aligned statement, one featured case in a wide row, then a 2-column list. Each case takes its own project color for one full-bleed summary band and the "next case" block; everything else stays neutral. One family (Archivo) in two widths: expanded for display, normal for reading. Motion = one native shared-element morph from thumbnail to case header (View Transitions), plus a slow ambient color field behind the page (see Ambient below); nothing on scroll. */
 :root{
   --ground:#1d1d21;   /* graphite page */
   --raised:#26262c;   /* thumbnails, inputs */
@@ -45,13 +45,22 @@ p,li{text-wrap:pretty}
 button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 
 /* Header */
-.head{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--ground);border-bottom:1px solid var(--rule)}
+/* Header: clear at the very top so the ambient field runs behind the name; once content scrolls under it the bar turns solid with a hairline, so text never shows through. */
+.head{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:transparent;border-bottom:1px solid transparent;transition:border-color .25s,background-color .25s}
+.head.stuck,.head.open{background:var(--ground)}
+.head.stuck{border-bottom-color:var(--rule)}
 .head .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
-.mark{text-decoration:none;font-weight:750;font-size:18px;font-stretch:112%;letter-spacing:-.01em}
+.mark{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:750;font-size:18px;font-stretch:112%;letter-spacing:-.01em;min-width:0}
+.mark small{font-weight:500;font-size:14px;font-stretch:100%;letter-spacing:0;color:var(--dim);padding-left:12px;border-left:1px solid var(--rule);white-space:nowrap}
+@media (max-width:900px){.mark small{display:none}}
 .nav{display:flex;align-items:center;gap:28px;font-size:15px}
-.nav a,.nav button{background:none;border:0;padding:6px 0;font:inherit;color:var(--dim);text-decoration:none;cursor:pointer;border-bottom:1.5px solid transparent;transition:color .15s,border-color .15s}
+.nav a,.nav button{position:relative;background:none;border:0;padding:6px 0;font:inherit;color:var(--dim);text-decoration:none;cursor:pointer;transition:color .15s}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+.nav a:hover::after,.nav a[aria-current="page"]::after{transform:scaleX(1);transform-origin:left}
 .nav a:hover,.nav button:hover{color:var(--text)}
-.nav a[aria-current="page"]{color:var(--text);border-bottom-color:var(--text)}
+.nav a[aria-current="page"]{color:var(--text)}
+.nav button[data-contact]{padding:8px 16px;border:1px solid var(--rule);border-radius:999px;color:var(--text);background:color-mix(in srgb,var(--text) 5%,transparent);transition:background-color .2s,color .2s,border-color .2s}
+.nav button[data-contact]:hover{background:var(--text);border-color:var(--text);color:var(--ground)}
 .burger{display:none;background:none;border:0;padding:10px;margin-right:-10px;cursor:pointer}
 .burger i{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;transition:transform .2s var(--ease),opacity .2s}
 .burger[aria-expanded="true"] i:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -69,12 +78,11 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 .hero p{margin:0 0 28px;max-width:56ch;color:var(--dim);font-size:clamp(17px,1.5vw,19px);line-height:1.6}
 .hero p b{color:var(--text);font-weight:600}
 .inline-links{display:flex;flex-wrap:wrap;gap:12px 28px;font-size:16px;font-weight:500}
-@media (max-width:720px){.hero{padding-block:48px 40px}}
+@media (max-width:720px){.hero{padding-block:64px 40px}}
 
 .group{padding-bottom:72px}
 .group-head{display:flex;align-items:baseline;justify-content:space-between;gap:6px 16px;flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:20px;margin-bottom:28px}
 .group-head h2{margin:0;font-weight:700;font-stretch:112%;font-size:25px;line-height:1.2;letter-spacing:-.01em}
-.group-head p{margin:0;color:var(--dim);font-size:15px}
 
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:44px 24px}
 .grid.product{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -224,13 +232,41 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}
 ::view-transition-group(cover){animation-duration:.42s;animation-timing-function:var(--ease)}
 
+/* Copy email confirms on the button itself */
+button[data-copy].copied{color:var(--ink)}
+.email button[data-copy].copied{background:var(--ink);color:var(--ground)}
+.email button[data-copy]{min-width:7.5em}
+/* Ambient. Three soft color fields drift behind the page, taken from the projects' own deep colors, under a fine static grain. Hovering a case on the home pulls the room toward that project's color; a case page settles into its palette. Cards tilt slightly toward the cursor. Pure CSS motion, no canvas. */
+@property --a1{syntax:"<color>";inherits:true;initial-value:#123a8c}
+@property --a2{syntax:"<color>";inherits:true;initial-value:#34103f}
+@property --a3{syntax:"<color>";inherits:true;initial-value:#0f3a2e}
+:root{--a1:#123a8c;--a2:#34103f;--a3:#0f3a2e;transition:--a1 1.4s var(--ease),--a2 1.4s var(--ease),--a3 1.4s var(--ease)}
+body{background:transparent}
+.ambient{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.ambient i{position:absolute;width:75vmax;height:75vmax;border-radius:50%;opacity:.5}
+.ambient i:nth-child(1){top:-30vmax;left:-20vmax;background:radial-gradient(closest-side,var(--a1),transparent);animation:d1 34s ease-in-out infinite alternate}
+.ambient i:nth-child(2){top:5vh;right:-35vmax;background:radial-gradient(closest-side,var(--a2),transparent);animation:d2 41s ease-in-out infinite alternate}
+.ambient i:nth-child(3){bottom:-40vmax;left:15vw;opacity:.24;background:radial-gradient(closest-side,var(--a3),transparent);animation:d3 47s ease-in-out infinite alternate}
+@keyframes d1{to{transform:translate(18vw,14vh) scale(1.15)}}
+@keyframes d2{to{transform:translate(-16vw,22vh) scale(.9)}}
+@keyframes d3{to{transform:translate(-12vw,-18vh) scale(1.1)}}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.item .thumb{position:relative;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.item .thumb::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,30%),rgba(255,255,255,.14),transparent 60%)}
+@media (hover:hover){
+  .item:hover .thumb{box-shadow:0 24px 60px -24px color-mix(in srgb,var(--pi) 45%,transparent)}
+  .item:hover .thumb::after{opacity:1}
+}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div><div class="grain" aria-hidden="true"></div>
 <header class="head">
   <div class="wrap bar">
-    <a class="mark" href="#work">Júlio John</a>
+    <a class="mark" href="#work">Júlio John<small>Visual and UX/UI Designer</small></a>
     <nav class="nav" aria-label="Main">
       <a href="#work" data-nav="work">Work</a>
       <a href="#about" data-nav="about">About</a>
@@ -422,11 +458,11 @@ function home(){
     </div>
   </section>
   <section class="wrap group" aria-labelledby="g-games">
-    <div class="group-head"><h2 id="g-games">Games</h2><p>${games.length} case studies on mobile, PC and VR</p></div>
+    <div class="group-head"><h2 id="g-games">Games</h2></div>
     <div class="grid">${games.map((p,i)=>card(p,i,false)).join("")}</div>
   </section>
   <section class="wrap group" aria-labelledby="g-product">
-    <div class="group-head"><h2 id="g-product">Product</h2><p>${product.length} case studies for iFood, on web and mobile</p></div>
+    <div class="group-head"><h2 id="g-product">Product</h2></div>
     <div class="grid product">${product.map((p,i)=>card(p,i+games.length,true)).join("")}</div>
   </section>`;
 }
@@ -438,7 +474,7 @@ function project(p){
   const d=p.details;
   const third=p.impact
     ?`<div><h3>Impact</h3><div class="impact">${p.impact.map(([v,l])=>`<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("")}</div></div>`
-    :`<div><h3>Goals</h3><ul>${p.goals.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
+    :p.goals?`<div><h3>Goals</h3><ul>${p.goals.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:"";
   app.innerHTML=`
   <div class="wrap">
     <header class="case-head">
@@ -573,12 +609,17 @@ viewer.addEventListener("close",()=>vimg.removeAttribute("src"));
 const toast=document.getElementById("toast");let tt;
 function say(m){toast.textContent=m;toast.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("show"),1800)}
 const burger=document.getElementById("burger"),drawer=document.getElementById("drawer");
-function closeDrawer(){drawer.hidden=true;burger.setAttribute("aria-expanded","false")}
-burger.addEventListener("click",()=>{drawer.hidden=!drawer.hidden;burger.setAttribute("aria-expanded",String(!drawer.hidden))});
+const head=document.querySelector(".head");
+function closeDrawer(){drawer.hidden=true;burger.setAttribute("aria-expanded","false");head.classList.remove("open")}
+burger.addEventListener("click",()=>{drawer.hidden=!drawer.hidden;burger.setAttribute("aria-expanded",String(!drawer.hidden));head.classList.toggle("open",!drawer.hidden)});
 document.addEventListener("click",e=>{
   if(e.target.closest("[data-copy]")){try{navigator.clipboard.writeText(EMAIL).then(()=>say("Email copied"),()=>say(EMAIL))}catch(err){say(EMAIL)}}
   if(e.target.closest("[data-contact]")){closeDrawer();document.getElementById("contact").scrollIntoView({behavior:reduce.matches?"auto":"smooth"})}
 });
+
+/* Header hairline once content scrolls under it */
+const stick=()=>head.classList.toggle("stuck",scrollY>8);
+addEventListener("scroll",stick,{passive:true});stick();
 
 /* Reading progress on case pages */
 const bar=document.getElementById("progress");let onCase=false,tick=false;
@@ -592,7 +633,8 @@ function render(id){
   onCase=!!p;bar.style.transform="scaleX(0)";
   if(!p){root.style.setProperty("--ink","#eeece7");root.style.setProperty("--band","#26262c")}
   document.querySelectorAll("[data-nav]").forEach(a=>{const on=(a.dataset.nav==="about")===(id==="about");on?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current")});
-  if(p)project(p);else if(id==="about")about();else home();
+  /* A content error in one case must never leave a blank or stuck page: fall back to the home list */
+  try{if(p)project(p);else if(id==="about")about();else home()}catch(err){console.error(err);home()}
   document.title=p?`${p.name} · Júlio John`:id==="about"?"About · Júlio John":"Júlio John Portfolio";
 }
 function go(id,{fromThumb=null,push=true}={}){
@@ -625,6 +667,39 @@ document.addEventListener("keydown",e=>{
   if(e.key==="ArrowLeft")document.querySelector(".side.prev")?.click();
   if(e.key==="ArrowRight")document.querySelector(".side.nxt")?.click();
 });
+/* Ambient layer. Everything below is decoration: each piece runs inside try/catch, so if a browser lacks a feature the portfolio still renders exactly as before. */
+const fine=matchMedia("(hover:hover) and (pointer:fine)");
+const safe=(fn)=>{try{fn()}catch(e){console.warn("fx",e)}};
+
+/* Copy email: the button itself confirms, the toast stays as the accessible message */
+document.addEventListener("click",e=>{const b=e.target.closest("button[data-copy]");if(!b||b.dataset.label)return;
+  b.dataset.label=b.textContent;b.textContent="Copied";b.classList.add("copied");
+  setTimeout(()=>{b.textContent=b.dataset.label;delete b.dataset.label;b.classList.remove("copied")},1600)});
+
+/* Run enhance() after every route render */
+const baseRender=render;
+render=function(id){baseRender(id);safe(()=>enhance(id))};
+
+/* B · Ambient color: the room takes the color of what you look at */
+const HOME=["#123a8c","#34103f","#0f3a2e"];
+function amb(a,b,c){root.style.setProperty("--a1",a);root.style.setProperty("--a2",b);root.style.setProperty("--a3",c)}
+if(fine.matches){
+  app.addEventListener("pointerover",e=>{const it=e.target.closest&&e.target.closest("a.item");if(!it)return;const p=P.find(x=>x.id===it.dataset.id);if(p)amb(p.band,p.band,p.ink)});
+  app.addEventListener("pointerout",e=>{const it=e.target.closest&&e.target.closest("a.item");if(it&&!it.contains(e.relatedTarget)&&!P.find(x=>x.id===current))amb(...HOME)});
+  /* Gentle tilt and light toward the cursor */
+  app.addEventListener("pointermove",e=>{if(reduce.matches)return;const t=e.target.closest&&e.target.closest(".item .thumb");if(!t)return;
+    const r=t.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    t.style.transform=`perspective(1000px) rotateX(${(-y*5).toFixed(2)}deg) rotateY(${(x*5).toFixed(2)}deg)`;
+    t.style.setProperty("--mx",e.clientX-r.left+"px");t.style.setProperty("--my",e.clientY-r.top+"px")},{passive:true});
+  app.addEventListener("pointerout",e=>{const t=e.target.closest&&e.target.closest(".item .thumb");if(t&&!t.contains(e.relatedTarget))t.style.transform=""});
+  app.addEventListener("pointerdown",e=>{const t=e.target.closest&&e.target.closest(".item .thumb");if(t)t.style.transform=""});
+}
+
+function enhance(id){
+  const p=P.find(x=>x.id===id);
+  p?amb(p.band,p.band,p.ink):amb(...HOME);
+}
+
 current=location.hash.slice(1)||"work";render(current);
 </script>
 
