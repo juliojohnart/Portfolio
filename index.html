@@ -20,7 +20,7 @@
   --raised:#26262c;   /* thumbnails, inputs */
   --rule:#36363d;
   --text:#eeece7;     /* warm off-white */
-  --dim:#a6a49e;
+  --dim:#aaa8a2;
   --ink:#eeece7;      /* per-project accent, set on case pages */
   --band:#26262c;     /* per-project deep color */
   --f:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -37,9 +37,9 @@ body{margin:0;color:var(--text);font-family:var(--f);font-size:16px;line-height:
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--ground)}
 img{max-width:100%;display:block}
 a{color:inherit}
+p,li{text-wrap:pretty}
 :focus-visible{outline:2px solid var(--text);outline-offset:3px;border-radius:3px}
 .wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--gl);padding-right:var(--gr)}
-.wide{font-stretch:125%}
 .link{color:var(--text);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:4px;text-decoration-thickness:1.5px;transition:text-decoration-color .15s}
 .link:hover{text-decoration-color:var(--text)}
 button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
@@ -47,7 +47,7 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 /* Header */
 .head{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--ground);border-bottom:1px solid var(--rule)}
 .head .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
-.mark{text-decoration:none;font-weight:800;font-size:18px;font-stretch:125%;letter-spacing:-.01em}
+.mark{text-decoration:none;font-weight:750;font-size:18px;font-stretch:112%;letter-spacing:-.01em}
 .nav{display:flex;align-items:center;gap:28px;font-size:15px}
 .nav a,.nav button{background:none;border:0;padding:6px 0;font:inherit;color:var(--dim);text-decoration:none;cursor:pointer;border-bottom:1.5px solid transparent;transition:color .15s,border-color .15s}
 .nav a:hover,.nav button:hover{color:var(--text)}
@@ -58,43 +58,54 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 .burger[aria-expanded="true"] i:nth-child(2){opacity:0}
 .burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .drawer{border-top:1px solid var(--rule);padding-block:4px 12px}
-.drawer a,.drawer button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--text);font:600 20px/1 var(--f);font-stretch:125%;padding:14px 0;text-decoration:none;cursor:pointer}
+.drawer a,.drawer button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--text);font:600 20px/1 var(--f);font-stretch:112%;padding:14px 0;text-decoration:none;cursor:pointer}
 @media (max-width:720px){.nav{display:none}.burger{display:block}}
 @media (min-width:721px){.drawer{display:none!important}}
 .progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--ink);transform-origin:0 50%;transform:scaleX(0)}
 
 /* Home */
-.hero{padding-block:72px 56px}
-.hero > *{max-width:900px}
-.hero h1{margin:0 0 22px;font-weight:800;font-stretch:125%;font-size:clamp(36px,6.4vw,76px);line-height:1;letter-spacing:-.025em;text-wrap:balance}
-.hero p{margin:0 0 24px;color:var(--dim);font-size:19px;line-height:1.55;max-width:58ch}
+.hero{padding-block:80px 64px}
+.hero h1{margin:0 0 24px;max-width:15ch;font-weight:760;font-stretch:115%;font-size:clamp(40px,5.8vw,68px);line-height:1.02;letter-spacing:-.03em;text-wrap:balance}
+.hero p{margin:0 0 28px;max-width:56ch;color:var(--dim);font-size:clamp(17px,1.5vw,19px);line-height:1.6}
 .hero p b{color:var(--text);font-weight:600}
 .inline-links{display:flex;flex-wrap:wrap;gap:12px 28px;font-size:16px;font-weight:500}
-@media (max-width:720px){.hero{padding-block:44px 36px}.hero p{font-size:17px}}
+@media (max-width:720px){.hero{padding-block:48px 40px}}
 
-.tabs{display:flex;align-items:baseline;gap:28px;border-bottom:1px solid var(--rule);margin-bottom:36px;overflow-x:auto}
-.tabs button{background:none;border:0;padding:12px 0;margin-bottom:-1px;font:600 17px/1 var(--f);font-stretch:112%;color:var(--dim);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s}
-.tabs button sup{font-size:11px;font-weight:500;margin-left:3px;color:var(--dim)}
-.tabs button:hover{color:var(--text)}
-.tabs button[aria-pressed="true"]{color:var(--text);border-bottom-color:var(--text)}
+.group{padding-bottom:72px}
+.group-head{display:flex;align-items:baseline;justify-content:space-between;gap:6px 16px;flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:20px;margin-bottom:28px}
+.group-head h2{margin:0;font-weight:700;font-stretch:112%;font-size:25px;line-height:1.2;letter-spacing:-.01em}
+.group-head p{margin:0;color:var(--dim);font-size:15px}
 
-.work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 28px;padding-bottom:88px}
-@media (max-width:680px){.work{grid-template-columns:1fr;gap:40px}}
-.item{display:grid;gap:16px;text-decoration:none;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:44px 24px}
+.grid.product{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.grid{gap:28px 14px}.grid.product{grid-template-columns:1fr}}
+
+.item{display:flex;flex-direction:column;gap:14px;text-decoration:none;min-width:0}
 .item .thumb{aspect-ratio:1/1;overflow:hidden;background:var(--raised);max-width:100%}
+.grid.product .thumb{aspect-ratio:16/9}
 .item .thumb img{width:100%;height:100%;object-fit:cover;transition:filter .2s}
 .item:hover .thumb img{filter:brightness(1.08)}
-.item h2{margin:0;font-weight:700;font-stretch:125%;font-size:clamp(20px,2.2vw,26px);line-height:1.15;letter-spacing:-.01em;transition:color .15s}
-.item:hover h2{color:var(--pi)}
-.item .kind{margin:4px 0 0;color:var(--dim);font-size:15px}
-.item .lede{margin:8px 0 0;color:var(--dim);font-size:15px;max-width:52ch}
-.item.lead{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px;align-items:end}
-.item.lead h2{font-size:clamp(28px,4vw,48px);line-height:1.02}
-.item.lead .lede{font-size:17px;margin-top:14px}
-.item.lead .facts-line{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 24px;font-size:15px}
+.item h3{margin:0;font-weight:650;font-stretch:105%;font-size:20px;line-height:1.2;letter-spacing:-.005em;transition:color .15s}
+.item:hover h3{color:var(--pi)}
+.item .kind{margin:4px 0 0;color:var(--dim);font-size:14px}
+.item .lede{margin:8px 0 0;color:#c9c7c1;font-size:15px;line-height:1.55;max-width:46ch}
+.item.lead{grid-column:span 2;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.item.lead h3{font-size:clamp(24px,2.6vw,32px);font-weight:720;font-stretch:112%;line-height:1.08;letter-spacing:-.015em}
+.item.lead .lede{font-size:16px;margin-top:12px}
+.item.lead .facts-line{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px 24px;font-size:14px}
 .item.lead .facts-line span{color:var(--dim)}
-.item.lead .facts-line b{display:block;color:var(--text);font-weight:600}
-@media (max-width:680px){.item.lead{grid-template-columns:1fr;gap:16px}}
+.item.lead .facts-line b{display:block;color:var(--text);font-weight:600;font-size:15px}
+@media (max-width:600px){
+  .item{gap:10px}
+  .item h3{font-size:16px}
+  .item .kind{font-size:13px;margin-top:2px}
+  .grid:not(.product) .item:not(.lead) .lede{display:none}
+  .item.lead{gap:14px;align-items:start}
+  .item.lead h3{font-size:20px}
+  .item.lead .lede{font-size:14px;margin-top:8px}
+  .item.lead .facts-line{display:none}
+}
 
 /* Case */
 .case-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:end;padding-block:36px 40px}
@@ -103,7 +114,7 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 .back svg{width:16px;height:16px;transition:transform .2s var(--ease)}
 .back:hover svg{transform:translateX(-3px)}
 .case-head .kind{margin:0 0 10px;color:var(--dim);font-size:15px}
-.case-head h1{margin:0 0 16px;font-weight:800;font-stretch:125%;font-size:clamp(38px,6.6vw,80px);line-height:.98;letter-spacing:-.03em;text-wrap:balance}
+.case-head h1{margin:0 0 16px;font-weight:760;font-stretch:115%;font-size:clamp(38px,6vw,72px);line-height:1;letter-spacing:-.03em;text-wrap:balance}
 .case-head .lede{margin:0;font-size:19px;color:var(--dim);max-width:56ch}
 .case-head .cover{width:clamp(96px,20vw,240px);height:auto;aspect-ratio:1/1;object-fit:cover;max-width:100%}
 @media (max-width:720px){.case-head{grid-template-columns:1fr;gap:20px}.case-head .cover{grid-row:2;width:96px}.case-head .lede{font-size:17px}}
@@ -119,7 +130,7 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 .story ul{padding-left:18px}
 .story li{margin-bottom:6px}
 .impact{display:grid;gap:14px}
-.impact div b{display:block;font-weight:800;font-stretch:125%;font-size:28px;line-height:1.05;color:#fff}
+.impact div b{display:block;font-weight:760;font-stretch:115%;font-size:28px;line-height:1.05;color:#fff}
 .impact div span{display:block;color:rgba(255,255,255,.78);font-size:14px;line-height:1.4;margin-top:2px}
 @media (max-width:860px){.story{grid-template-columns:1fr;gap:26px}}
 
@@ -134,7 +145,7 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 .board figcaption strong{color:var(--text);font-weight:600}
 
 .details{margin-top:96px;border-top:1px solid var(--rule);padding-block:48px 16px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:32px}
-.details h2{margin:0;font-weight:700;font-stretch:125%;font-size:24px;line-height:1.2}
+.details h2{margin:0;font-weight:700;font-stretch:112%;font-size:25px;line-height:1.2}
 .details .body{max-width:66ch;min-width:0}
 .details p{margin:0 0 14px;color:#d8d6d0}
 .details h3{margin:28px 0 10px;font-size:15px;font-weight:700;font-stretch:112%}
@@ -149,7 +160,7 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 .next .wrap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center;padding-block:28px}
 .next img{width:88px;height:88px;object-fit:cover}
 .next small{display:block;font-size:14px;color:rgba(255,255,255,.72)}
-.next strong{display:block;font-weight:800;font-stretch:125%;font-size:clamp(22px,3.4vw,36px);line-height:1.05;letter-spacing:-.015em}
+.next strong{display:block;font-weight:760;font-stretch:115%;font-size:clamp(22px,3.4vw,36px);line-height:1.05;letter-spacing:-.015em}
 .next svg{width:28px;height:28px;transition:transform .2s var(--ease)}
 .next:hover svg{transform:translateX(6px)}
 @media (max-width:520px){.next img{width:64px;height:64px}.next .wrap{gap:16px}}
@@ -162,29 +173,38 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 @media (max-width:1340px){.side{display:none}}
 
 /* About */
-.about{padding-block:64px 72px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:48px}
-.about h1{margin:0;font-weight:800;font-stretch:125%;font-size:clamp(36px,5.4vw,64px);line-height:1;letter-spacing:-.025em}
-.about .intro{margin:0 0 8px;font-size:19px;color:#d8d6d0;max-width:58ch}
-.about h2{margin:40px 0 14px;font-weight:700;font-stretch:112%;font-size:17px}
-.steps{list-style:none;padding:0;margin:0;display:grid;gap:14px;counter-reset:s}
+.about{padding-block:64px 72px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);gap:48px}
+.about h1{margin:0;font-weight:760;font-stretch:115%;font-size:clamp(38px,5vw,60px);line-height:1;letter-spacing:-.025em}
+.about .side-note{margin:18px 0 0;color:var(--dim);font-size:15px;max-width:30ch}
+.about .intro{margin:0 0 12px;font-size:19px;line-height:1.6;color:#d8d6d0;max-width:60ch}
+.about .intro b{color:var(--text);font-weight:600}
+.about h2{margin:48px 0 16px;font-weight:700;font-stretch:112%;font-size:20px;line-height:1.2}
+.timeline{list-style:none;padding:0;margin:0;border-top:1px solid var(--rule)}
+.timeline > li{padding:22px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 20px}
+.timeline .co{font-weight:700;font-stretch:105%;font-size:18px}
+.timeline .when{color:var(--dim);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:3px}
+.timeline .role{grid-column:1/-1;color:var(--text);font-size:15.5px}
+.timeline .role span{color:var(--dim)}
+.timeline ul{grid-column:1/-1;margin:10px 0 0;padding-left:18px;color:var(--dim);font-size:15px}
+.timeline ul li{margin-bottom:6px}
+.timeline ul b{color:var(--text);font-weight:600}
+.timeline .cases{grid-column:1/-1;margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px}
+.steps{list-style:none;padding:0;margin:0;display:grid;gap:12px;counter-reset:s}
 .steps li{counter-increment:s;display:grid;grid-template-columns:2em minmax(0,1fr);gap:8px;color:var(--dim)}
 .steps li::before{content:counter(s);font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
 .steps strong{color:var(--text);font-weight:600}
-.xp{list-style:none;padding:0;margin:0;border-top:1px solid var(--rule)}
-.xp li{border-bottom:1px solid var(--rule)}
-.xp a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;padding:14px 0;text-decoration:none}
-.xp b{font-weight:600}
-.xp span{color:var(--dim);font-variant-numeric:tabular-nums}
-.xp em{grid-column:1/-1;color:var(--dim);font-style:normal;font-size:15px}
-.xp a:hover b{text-decoration:underline;text-underline-offset:4px}
-@media (max-width:860px){.about{grid-template-columns:1fr;gap:16px;padding-block:44px 56px}}
+.kit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.kit h3{margin:0 0 8px;font-size:15px;font-weight:600;color:var(--dim)}
+.kit p{margin:0;font-size:16px;line-height:1.7}
+@media (max-width:860px){.about{grid-template-columns:1fr;gap:16px;padding-block:44px 56px}.about .side-note{display:none}}
+@media (max-width:520px){.timeline > li{grid-template-columns:1fr}.timeline .when{padding-top:0;order:-1}.kit{grid-template-columns:1fr}}
 
 /* Contact */
 .contact{border-top:1px solid var(--rule)}
 .contact .wrap{padding-block:64px 36px}
 .contact p{margin:0 0 14px;color:var(--dim);font-size:17px}
 .email{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 20px;margin-bottom:28px}
-.email code{font:800 clamp(22px,4.6vw,52px)/1.05 var(--f);font-stretch:125%;letter-spacing:-.02em;color:var(--text);user-select:all;overflow-wrap:anywhere}
+.email code{font:760 clamp(22px,4.4vw,48px)/1.05 var(--f);font-stretch:115%;letter-spacing:-.02em;color:var(--text);user-select:all;overflow-wrap:anywhere}
 .email button{background:var(--text);color:var(--ground);border:0;border-radius:999px;padding:10px 16px;font:600 14px/1 var(--f);cursor:pointer;transition:transform .1s}
 .email button:active{transform:scale(.97)}
 .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 28px;border-top:1px solid var(--rule);padding-top:20px;color:var(--dim);font-size:14px}
@@ -230,13 +250,13 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 
 <section class="contact" id="contact" aria-label="Contact">
   <div class="wrap">
-    <p>Open to senior UX/UI and art direction roles in games and digital products.</p>
+    <p>Want to talk about game UI, visual design or a project? Write to me.</p>
     <div class="email"><code id="mail">julio_john@hotmail.com.br</code><button type="button" data-copy>Copy email</button></div>
     <div class="inline-links" style="margin-bottom:48px">
       <a class="link" href="https://www.linkedin.com/in/juliojohn" target="_blank" rel="noopener">LinkedIn</a>
       <a class="link" href="https://juliojohn.itch.io" target="_blank" rel="noopener">Playable games on itch.io</a>
     </div>
-    <div class="foot"><span>Júlio John © All rights reserved</span><span>Senior UX/UI Designer and Art Director</span></div>
+    <div class="foot"><span>Júlio John © All rights reserved</span><span>Visual Designer at Wildlife Studios</span></div>
   </div>
 </section>
 
@@ -255,40 +275,38 @@ const SV={
 
 /* ink = bright project accent, band = deep project color. Board: [file, width, height, title, caption] */
 const P=[
- {id:"sprint-sailors",name:"Sprint Sailors",cat:"games",lead:true,ink:"#7db4ff",band:"#123a8c",
-  kind:"Mobile game, 2023",discipline:"Game UX/UI and art direction",cover:["cover-sprint",635],
-  lede:"A mobile game that teaches SCRUM through the daily routine of a pirate crew.",
-  facts:[["Role","Senior UX/UI Designer and Art Director"],["Company","Eldorado Research Institute"],["Year","2023"],["Duration","7 months"],["Platform","Mobile"],["Team","Led 4 junior designers"]],
-  problem:"Teach the SCRUM methodology in a practical, fast and efficient way, without the stress of a classroom, so fun becomes an ally for comprehension.",
-  contribution:["Defined game objectives, metrics and user journey with stakeholders","Wireframes and interactive prototypes for testing, then high-fidelity UI","Visual identity, character illustrations and art direction of all assets","Career mentorship for 4 junior designers"],
-  impact:[["R$ 1M+","follow-up funding for an educational game on Vision Pro and Meta Quest"],["New unit","the company opened a business line for educational games"],["50+","students in the February 2024 playtest"]],
+ {id:"twvc",name:"The Weird Vacuum Company",cat:"games",ink:"#4ff0b4",band:"#0f3a2e",
+  kind:"Co-op PC game, 2025, playable",discipline:"Game art and UX/UI",cover:["cover-twvc",635],
+  lede:"A co-op multiplayer game where cleaning robots bring order to chaotic homes.",
+  facts:[["Role","Art Director and UX/UI Designer"],["Year","2025"],["Platform","PC (itch.io)"],["Mode","Co-op multiplayer"],["Team","2 people"]],
+  problem:"Let players set up a match, gather a team and jump into the cleaning chaos without friction, and understand actions and objectives through clear in-game feedback.",
+  contribution:["UX/UI for setup, lobby, HUD, mission status and settings","Art direction, character and prop design","Reusable settings components"],
+  impact:[["Playable","published on itch.io"]],
+  play:"https://juliojohn.itch.io/the-weird-vacuum-company",
   boards:[
-   ["sprint-02",1600,1110,"User flow","The Ship Hub leads into the main loop (Briefing, Backlog, Planning, Daily, Retro, Review) and to secondary flows (Task board, Dictionary)."],
-   ["sprint-03",1600,1018,"Briefing","Crew dialogue introduces each SCRUM ceremony inside the game world."],
-   ["sprint-04",884,1600,"Tasks, Dictionary and Rewards","Players complete tasks and stories, revisit any concept with everyday examples, and get celebrated when they make progress."],
-   ["sprint-05",1294,1600,"Logo and UI elements","A logo that can turn into a pirate flag, plus the supervised kit of books, scrolls and cards."],
-   ["sprint-06",1600,976,"Characters","The Captain (Scrum Master), the Tripulants and the Intendant (Product Owner)."],
-   ["sprint-07",1600,869,"Results","A new business unit and more than R$ 1 million in follow-up funding."],
-   ["sprint-08",1600,900,"Playtest","Caldeira Research Institute, February 2024, with 50+ trained students."]],
-  details:{intro:["A Sr. Design and Art job I worked on for the Sprint Sailors game by Eldorado Research Institute © 2023.","The challenge was to create a mobile game that teaches the SCRUM methodology in a practical, fast, efficient manner, all while ensuring a stress-free experience, making fun an ally for comprehension."],
-   resp:[["Senior UI/UX Designer",["Collaborate with stakeholders to define game objectives, metrics, and user journey.","Create low-fidelity wireframes to structure the game and develop interactive prototypes for testing.","Illustrated all character designs used in the final UIs.","Design high-fidelity mockups and visual specifications for consistent implementation."]],
-    ["Art Direction",["Define the visual identity of the game, including style, color palette and graphic elements.","Supervise the creation of all visual assets, including characters, environments, and UI (HUD and icons).","Create style guides and documentation to ensure design consistency.","Review the designers' work regularly, providing constructive and specific feedback.","Ensure that the work aligns with the game's aesthetic cohesion and established quality standards."]],
-    ["Career Mentorship",["Career mentorship with 4 junior designers (2 UI/UX Designers and 2 Visual Designers).","Support in setting career goals and planning professional development.","Assist designers in building and enhancing their professional portfolios.","Organize and conduct workshops and training sessions on topics such as UI, design, perspective and digital painting."]]]}},
+   ["twvc-01",1600,423,"Logo","Game identity."],
+   ["twvc-02",1600,900,"Key art","The robots at work in a messy home."],
+   ["twvc-03",1600,6391,"Setup, HUD, mission status and settings","From main menu and lobby to in-game feedback and the end-of-floor stats."],
+   ["twvc-04",1600,2103,"Character design","Mechanics tested for readability, then fine tuning and early explorations."],
+   ["twvc-05",1600,2187,"Prop design","Low-poly props that show the world from a robot's point of view."]],
+  details:{intro:["A project I worked on as an Art Director and UX/UI Designer in 2025.","The game is a cooperative multiplayer experience where players control cleaning robots tasked with bringing order to chaotic homes."],
+   credits:[["UX/UI and Art Direction","Júlio John"],["Game Design and Programming","Geovana Contine","https://www.linkedin.com/in/geovanacontine/"]]}},
 
- {id:"gacha-game",name:"Unreleased Gacha Game",cat:"games",ink:"#b9a1ff",band:"#2b2160",
-  kind:"Mobile game, 2024",discipline:"Game UX/UI",cover:["cover-gacha",635],
-  lede:"UX/UI for a fantasy gacha game with collectible cats and team-based battles.",
-  facts:[["Role","Sr. UX/UI Designer"],["Company","Meso Lab Inc. (Canada)"],["Year","2024"],["Duration","3 months"],["Platform","Mobile"],["Team","Art director and 2 character artists"]],
-  problem:"Create a fantasy-themed gacha game featuring collectible cats that enchants players with strategic gameplay, striking visuals and a variety of unique character abilities.",
-  contribution:["Defined mechanics, objectives and metrics with stakeholders and the product manager","Wireframes and interactive prototypes for the art director, artists, animators and developers","High-fidelity mockups, visual specs and style guides","UI visual identity with the art director, including HUD and icons"],
-  goals:["Engage players with strategic combat and gacha mechanics","Stylized visuals to attract cat and fantasy fans","Player retention through a pet care system"],
+ {id:"weather-inc",name:"Weather Inc",cat:"games",ink:"#9fe3e6",band:"#244a4e",
+  kind:"PC game, 2025, playable",discipline:"Game UX/UI and art direction",cover:["cover-weather",635],
+  lede:"Run a chaotic forecasting office where quirky employees and strange signs predict the weather.",
+  facts:[["Role","Art Director and UX/UI Designer"],["Type","Personal project"],["Year","2025"],["Platform","PC (itch.io)"],["Team","3 people"]],
+  problem:"Make deduction from bizarre clues readable and fun, so players can connect patterns and lock in a forecast with style and instinct.",
+  contribution:["UX/UI and art direction","Wireframe explorations for staff selection","UI kit and props in a hand-drawn office style"],
+  impact:[["Playable","published on itch.io"]],
+  play:"https://juliojohn.itch.io/weatherinc",
   boards:[
-   ["gacha-02",577,1600,"Battle screen","Final battle HUD plus explorations of wireframes, stamina bar, icons, character frames and buttons."],
-   ["gacha-03",756,1600,"Chapter and team selection","Team power, enemies and rewards up front, with four wireframe layouts explored for team building."],
-   ["gacha-04",1294,1600,"Item detail and UI kit","The item pop-up and the full set of components it was built from."]],
-  details:{intro:["A Sr. UX/UI design job I worked on for an unannounced game by Meso Lab Inc. (Canada) in 2024.","The challenge was to create a fantasy-themed gacha game featuring collectible cats, designed to enchant players with strategic gameplay, stunning visuals, and a variety of unique character abilities."],
-   credits:[["Art Director","Guilherme Franzoni","https://www.artstation.com/guimonez"],["Character Artist","Iasmin Zoia","https://www.artstation.com/iasmimzoia"],["Character Artist","Phil C.","https://www.artstation.com/philcavalcanti"]],
-   resp:[["My responsibilities",["Collaborate with stakeholders and product manager to define game mechanics, objectives and metrics.","Create low-fidelity wireframes to structure the game and develop interactive prototypes for testing that help the art director, artists, animators and developers.","Create high-fidelity mockups and visual specifications for consistent implementation.","Define the game's UI visual identity in collaboration with the art director, including the style, color palette, and UI elements such as the HUD and icons.","Create style guides and documentation to ensure design consistency."]]]}},
+   ["weather-01",1600,423,"Logo","Game identity."],
+   ["weather-02",1029,1600,"In-game screen and staff details","Analyze clues around the office and check each employee's instincts."],
+   ["weather-03",576,1600,"Staff selection, forecast and endings","Four wireframe explorations, the results screen and the win and lose states."],
+   ["weather-04",1600,1175,"UI kit","Rating cards, clock, buttons, panels and props."]],
+  details:{intro:["A personal project I worked on as an Art Director and UX/UI Designer in 2025.","The game is about leading a chaotic weather forecasting office, where players rely on quirky employee instincts, strange environmental signs, and teamwork to predict the weather and survive as many days as possible."],
+   credits:[["UX/UI and Art Direction","Júlio John"],["Game Design and Programming","Geovana Contine","https://www.linkedin.com/in/geovanacontine/"],["Character Artist","Fabiola Andrade","https://www.linkedin.com/in/fabiolaalvesandrade/"]]}},
 
  {id:"hack-and-lock",name:"Hack&Lock",cat:"games",ink:"#ff7cbd",band:"#34103f",
   kind:"VR game, 2024",discipline:"VR UX and visual design",cover:["cover-hack",635],
@@ -313,58 +331,63 @@ const P=[
   details:{intro:["A Lead UX and Visual Design job I worked on for Hack&Lock by Instituto de Pesquisas Eldorado in 2024.","The challenge was to create an immersive VR training game where players explore a corporate office, identify cybersecurity flaws, and learn the real-world consequences of unsafe digital behavior."],
    credits:[["Lead UX and Visual Designer","Júlio John"],["UX and Visual Designer","Yumi Hatakeyama","https://bit.ly/yumihat-portfolio"]]}},
 
+ {id:"gacha-game",name:"Unreleased Gacha Game",cat:"games",ink:"#b9a1ff",band:"#2b2160",
+  kind:"Mobile game, 2024",discipline:"Game UX/UI",cover:["cover-gacha",635],
+  lede:"UX/UI for a fantasy gacha game with collectible cats and team-based battles.",
+  facts:[["Role","Sr. UX/UI Designer"],["Company","Meso Lab Inc. (Canada)"],["Year","2024"],["Duration","3 months"],["Platform","Mobile"],["Team","Art director and 2 character artists"]],
+  problem:"Create a fantasy-themed gacha game featuring collectible cats that enchants players with strategic gameplay, striking visuals and a variety of unique character abilities.",
+  contribution:["Defined mechanics, objectives and metrics with stakeholders and the product manager","Wireframes and interactive prototypes for the art director, artists, animators and developers","High-fidelity mockups, visual specs and style guides","UI visual identity with the art director, including HUD and icons"],
+  goals:["Engage players with strategic combat and gacha mechanics","Stylized visuals to attract cat and fantasy fans","Player retention through a pet care system"],
+  boards:[
+   ["gacha-02",577,1600,"Battle screen","Final battle HUD plus explorations of wireframes, stamina bar, icons, character frames and buttons."],
+   ["gacha-03",756,1600,"Chapter and team selection","Team power, enemies and rewards up front, with four wireframe layouts explored for team building."],
+   ["gacha-04",1294,1600,"Item detail and UI kit","The item pop-up and the full set of components it was built from."]],
+  details:{intro:["A Sr. UX/UI design job I worked on for an unannounced game by Meso Lab Inc. (Canada) in 2024.","The challenge was to create a fantasy-themed gacha game featuring collectible cats, designed to enchant players with strategic gameplay, stunning visuals, and a variety of unique character abilities."],
+   credits:[["Art Director","Guilherme Franzoni","https://www.artstation.com/guimonez"],["Character Artist","Iasmin Zoia","https://www.artstation.com/iasmimzoia"],["Character Artist","Phil C.","https://www.artstation.com/philcavalcanti"]],
+   resp:[["My responsibilities",["Collaborate with stakeholders and product manager to define game mechanics, objectives and metrics.","Create low-fidelity wireframes to structure the game and develop interactive prototypes for testing that help the art director, artists, animators and developers.","Create high-fidelity mockups and visual specifications for consistent implementation.","Define the game's UI visual identity in collaboration with the art director, including the style, color palette, and UI elements such as the HUD and icons.","Create style guides and documentation to ensure design consistency."]]]}},
+
+ {id:"sprint-sailors",name:"Sprint Sailors",cat:"games",lead:true,ink:"#7db4ff",band:"#123a8c",
+  kind:"Mobile game, 2023",discipline:"Game UX/UI and art direction",cover:["cover-sprint",635],
+  lede:"A mobile game that teaches SCRUM through the daily routine of a pirate crew.",
+  facts:[["Role","Senior UX/UI Designer and Art Director"],["Company","Eldorado Research Institute"],["Year","2023"],["Duration","7 months"],["Platform","Mobile"],["Team","Led 4 junior designers"]],
+  problem:"Teach the SCRUM methodology in a practical, fast and efficient way, without the stress of a classroom, so fun becomes an ally for comprehension.",
+  contribution:["Defined game objectives, metrics and user journey with stakeholders","Wireframes and interactive prototypes for testing, then high-fidelity UI","Visual identity, character illustrations and art direction of all assets","Career mentorship for 4 junior designers"],
+  impact:[["R$ 1M+","follow-up funding for an educational game on Vision Pro and Meta Quest"],["New unit","the company opened a business line for educational games"],["50+","students in the February 2024 playtest"]],
+  boards:[
+   ["sprint-02",1600,1110,"User flow","The Ship Hub leads into the main loop (Briefing, Backlog, Planning, Daily, Retro, Review) and to secondary flows (Task board, Dictionary)."],
+   ["sprint-03",1600,1018,"Briefing","Crew dialogue introduces each SCRUM ceremony inside the game world."],
+   ["sprint-04",884,1600,"Tasks, Dictionary and Rewards","Players complete tasks and stories, revisit any concept with everyday examples, and get celebrated when they make progress."],
+   ["sprint-05",1294,1600,"Logo and UI elements","A logo that can turn into a pirate flag, plus the supervised kit of books, scrolls and cards."],
+   ["sprint-06",1600,976,"Characters","The Captain (Scrum Master), the Tripulants and the Intendant (Product Owner)."],
+   ["sprint-07",1600,869,"Results","A new business unit and more than R$ 1 million in follow-up funding."],
+   ["sprint-08",1600,900,"Playtest","Caldeira Research Institute, February 2024, with 50+ trained students."]],
+  details:{intro:["A Sr. Design and Art job I worked on for the Sprint Sailors game by Eldorado Research Institute © 2023.","The challenge was to create a mobile game that teaches the SCRUM methodology in a practical, fast, efficient manner, all while ensuring a stress-free experience, making fun an ally for comprehension."],
+   resp:[["Senior UI/UX Designer",["Collaborate with stakeholders to define game objectives, metrics, and user journey.","Create low-fidelity wireframes to structure the game and develop interactive prototypes for testing.","Illustrated all character designs used in the final UIs.","Design high-fidelity mockups and visual specifications for consistent implementation."]],
+    ["Art Direction",["Define the visual identity of the game, including style, color palette and graphic elements.","Supervise the creation of all visual assets, including characters, environments, and UI (HUD and icons).","Create style guides and documentation to ensure design consistency.","Review the designers' work regularly, providing constructive and specific feedback.","Ensure that the work aligns with the game's aesthetic cohesion and established quality standards."]],
+    ["Career Mentorship",["Career mentorship with 4 junior designers (2 UI/UX Designers and 2 Visual Designers).","Support in setting career goals and planning professional development.","Assist designers in building and enhancing their professional portfolios.","Organize and conduct workshops and training sessions on topics such as UI, design, perspective and digital painting."]]]}},
+
  {id:"ifood-promotion-platform",name:"iFood Promotion Platform",cat:"product",ink:"#ff7d80",band:"#5e1117",
-  kind:"Web and mobile product",discipline:"Product UX/UI",cover:["cover-ifood-platform",635],
+  kind:"Web and mobile product, 2022",discipline:"Product UX/UI",cover:["cover-ifood-platform",635],
   lede:"Redesign of the platform restaurants use to invest in promotions on iFood.",
-  facts:[["Role","UX/UI Designer"],["Company","iFood"],["Duration","6 months"],["Platform","Web and mobile"]],
+  facts:[["Role","UX/UI Designer"],["Company","iFood"],["Year","2022"],["Duration","6 months"],["Platform","Web and mobile"],["Design lead","Patricia Panza"]],
   problem:"Design an investment platform that is easy to engage with, transparent to use and scalable for the product, while also ensuring economic profitability for iFood.",
-  contribution:["Promotion discovery tailored to each restaurant's goals","Performance view of current promotions","Responsive layouts for desktop and phone"],
+  contribution:["Ran 40+ user research interviews to guide the platform","Wireframes and prototypes for promotion discovery by goal","Performance view of current promotions, on desktop and phone"],
+  impact:[["+21%","organic investment from restaurants after the redesign"],["22k","restaurants joined promotions, new and returning"]],
   goals:["Help restaurants grow","Offer better promotions to users and restaurants","Financial efficiency for iFood"],
   boards:[["ifood-platform-hero",1071,600,"Promotions","Restaurants find promotions by goal: attract new customers, retain existing ones, boost sales, and track what is running."]],
-  details:{intro:["Redesign of iFood's promotion platform for partner restaurants: easily find the best promotions tailored to each restaurant's goals, helping to attract new customers, retain existing ones, boost sales, and monitor the performance of current promotions."]}},
+  details:{intro:["A UX/UI project for iFood in 2022.","Redesign of iFood's promotion platform for partner restaurants: easily find the best promotions tailored to each restaurant's goals, helping to attract new customers, retain existing ones, boost sales, and monitor the performance of current promotions."],
+   credits:[["UX/UI Design Lead","Patricia Panza","https://www.linkedin.com/in/patypanza"],["UX/UI Designer","Júlio John"]]}},
 
  {id:"ifood-1-year-free",name:"iFood 1 Year Free",cat:"product",ink:"#ffc94d",band:"#8d1a1f",
-  kind:"Mobile campaign",discipline:"Product UX/UI",cover:["ifood-year-hero",1071],
+  kind:"Mobile campaign, 2022",discipline:"Product UX/UI",cover:["ifood-year-hero",1071],
   lede:"Opt-in experience for the giveaway that celebrated iFood's 10th anniversary.",
-  facts:[["Role","UX/UI Designer"],["Company","iFood"],["Duration","4 weeks"],["Platform","Mobile app"]],
+  facts:[["Role","UX/UI Designer"],["Company","iFood"],["Year","2022"],["Duration","4 weeks"],["Platform","Mobile app"]],
   problem:"A promotional giveaway to celebrate iFood's 10th anniversary, where winners get one year of free iFood food.",
   contribution:["Opt-in screen with all rules in clear, festive language","Campaign visual applied to the app experience"],
   goals:["Increase engagement","Grow the number of customers","Retain new customers"],
   boards:[["ifood-year-hero",1071,600,"Promotion opt-in","Engaging language and a festive design present every rule while celebrating the occasion."]],
-  details:{intro:["Presented with engaging language and a festive design, the opt-in screen shows all rules and aims to captivate users while celebrating the occasion."]}},
-
- {id:"weather-inc",name:"Weather Inc",cat:"games",ink:"#9fe3e6",band:"#244a4e",
-  kind:"PC game, 2025, playable",discipline:"Game UX/UI and art direction",cover:["cover-weather",635],
-  lede:"Run a chaotic forecasting office where quirky employees and strange signs predict the weather.",
-  facts:[["Role","Art Director and UX/UI Designer"],["Type","Personal project"],["Year","2025"],["Platform","PC (itch.io)"],["Team","3 people"]],
-  problem:"Make deduction from bizarre clues readable and fun, so players can connect patterns and lock in a forecast with style and instinct.",
-  contribution:["UX/UI and art direction","Wireframe explorations for staff selection","UI kit and props in a hand-drawn office style"],
-  impact:[["Playable","published on itch.io"]],
-  play:"https://juliojohn.itch.io/weatherinc",
-  boards:[
-   ["weather-01",1600,423,"Logo","Game identity."],
-   ["weather-02",1029,1600,"In-game screen and staff details","Analyze clues around the office and check each employee's instincts."],
-   ["weather-03",576,1600,"Staff selection, forecast and endings","Four wireframe explorations, the results screen and the win and lose states."],
-   ["weather-04",1600,1175,"UI kit","Rating cards, clock, buttons, panels and props."]],
-  details:{intro:["A personal project I worked on as an Art Director and UX/UI Designer in 2025.","The game is about leading a chaotic weather forecasting office, where players rely on quirky employee instincts, strange environmental signs, and teamwork to predict the weather and survive as many days as possible."],
-   credits:[["UX/UI and Art Direction","Júlio John"],["Game Design and Programming","Geovana Contine","https://www.linkedin.com/in/geovanacontine/"],["Character Artist","Fabiola Andrade","https://www.linkedin.com/in/fabiolaalvesandrade/"]]}},
-
- {id:"twvc",name:"The Weird Vacuum Company",cat:"games",ink:"#4ff0b4",band:"#0f3a2e",
-  kind:"Co-op PC game, 2025, playable",discipline:"Game art and UX/UI",cover:["cover-twvc",635],
-  lede:"A co-op multiplayer game where cleaning robots bring order to chaotic homes.",
-  facts:[["Role","Art Director and UX/UI Designer"],["Year","2025"],["Platform","PC (itch.io)"],["Mode","Co-op multiplayer"],["Team","2 people"]],
-  problem:"Let players set up a match, gather a team and jump into the cleaning chaos without friction, and understand actions and objectives through clear in-game feedback.",
-  contribution:["UX/UI for setup, lobby, HUD, mission status and settings","Art direction, character and prop design","Reusable settings components"],
-  impact:[["Playable","published on itch.io"]],
-  play:"https://juliojohn.itch.io/the-weird-vacuum-company",
-  boards:[
-   ["twvc-01",1600,423,"Logo","Game identity."],
-   ["twvc-02",1600,900,"Key art","The robots at work in a messy home."],
-   ["twvc-03",1600,6391,"Setup, HUD, mission status and settings","From main menu and lobby to in-game feedback and the end-of-floor stats."],
-   ["twvc-04",1600,2103,"Character design","Mechanics tested for readability, then fine tuning and early explorations."],
-   ["twvc-05",1600,2187,"Prop design","Low-poly props that show the world from a robot's point of view."]],
-  details:{intro:["A project I worked on as an Art Director and UX/UI Designer in 2025.","The game is a cooperative multiplayer experience where players control cleaning robots tasked with bringing order to chaotic homes."],
-   credits:[["UX/UI and Art Direction","Júlio John"],["Game Design and Programming","Geovana Contine","https://www.linkedin.com/in/geovanacontine/"]]}}
+  details:{intro:["A UX/UI project for iFood in 2022.","Presented with engaging language and a festive design, the opt-in screen shows all rules and aims to captivate users while celebrating the occasion."],
+   credits:[["UX/UI Design Lead","Ricardo Tedeschi","https://br.linkedin.com/in/ricardo-tedeschi"],["Sr. Visual Designer","Bruno Okada","https://brunookada.com"],["UX/UI Designer","Júlio John"]]}}
 ];
 
 const app=document.getElementById("app");
@@ -372,44 +395,40 @@ const root=document.documentElement;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const img=(base,w)=>w>900?{src:`w/${base}-800.webp`,set:`w/${base}-800.webp 800w, w/${base}-${w}.webp ${w}w`}:{src:`w/${base}-${w}.webp`,set:""};
 const reduce=matchMedia("(prefers-reduced-motion: reduce)");
-let filter="all";
-try{filter=localStorage.getItem("jj-filter3")||"all"}catch(e){}
+function card(p,i,product){
+  const t=product?{base:p.boards[0][0],w:p.boards[0][1]}:{base:p.cover[0],w:p.cover[1]};
+  const c=img(t.base,t.w);
+  return `<a class="item${p.lead?" lead":""}" href="#${p.id}" data-id="${p.id}" style="--pi:${p.ink}">
+    <div class="thumb"><img src="${c.src}" ${c.set?`srcset="${c.set}" sizes="(min-width:1200px) 580px, (min-width:600px) 48vw, 100vw"`:""} alt="" width="${product?1071:635}" height="${product?600:635}" ${i>2?'loading="lazy"':""} decoding="async"></div>
+    <div>
+      <h3>${esc(p.name)}</h3>
+      <p class="kind">${esc(p.kind)}</p>
+      <p class="lede">${esc(p.lede)}</p>
+      ${p.lead?`<div class="facts-line">${[p.facts[0],p.facts[1],p.facts[3]].map(([k,v])=>`<div><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join("")}</div>`:""}
+    </div>
+  </a>`;
+}
 
 function home(){
-  const n={all:P.length,games:P.filter(p=>p.cat==="games").length,product:P.filter(p=>p.cat==="product").length};
-  const list=P.filter(p=>filter==="all"||p.cat===filter);
+  const games=P.filter(p=>p.cat==="games"),product=P.filter(p=>p.cat==="product");
   app.innerHTML=`
   <section class="wrap hero">
     <h1>Interfaces for games and digital products.</h1>
-    <p>I'm <b>Júlio John</b>, a senior UX/UI designer and art director. I take projects from user flows and wireframes to high-fidelity UI, visual identity and the specs developers build from, on mobile, PC and VR.</p>
+    <p>I'm <b>Júlio John</b>, a visual and UX/UI designer with 7+ years across mobile, PC and VR, currently a Visual Designer on Zooba at Wildlife Studios. Before that, iFood and Instituto de Pesquisas Eldorado.</p>
     <div class="inline-links">
       <button type="button" class="link" data-copy>Copy email</button>
       <a class="link" href="https://www.linkedin.com/in/juliojohn" target="_blank" rel="noopener">LinkedIn</a>
       <a class="link" href="#about">About me</a>
     </div>
   </section>
-  <section class="wrap" aria-label="Work">
-    <div class="tabs" role="group" aria-label="Filter work">
-      ${[["all","All work"],["games","Games"],["product","Product"]].map(([k,l])=>`<button type="button" id="tab-${k}" data-filter="${k}" aria-pressed="${filter===k}">${l}<sup>${n[k]}</sup></button>`).join("")}
-    </div>
-    <div class="work">
-      ${list.map((p,i)=>{
-        const c=img(p.cover[0],p.cover[1]);const lead=p.lead&&filter!=="product";
-        return `<a class="item${lead?" lead":""}" href="#${p.id}" data-id="${p.id}" style="--pi:${p.ink}">
-          <div class="thumb"><img src="${c.src}" ${c.set?`srcset="${c.set}" sizes="(min-width:1200px) 580px, (min-width:680px) 48vw, 100vw"`:""} alt="" width="635" height="635" ${i>2?'loading="lazy"':""} decoding="async"></div>
-          <div>
-            <h2>${esc(p.name)}</h2>
-            <p class="kind">${esc(p.kind)}</p>
-            <p class="lede">${esc(p.lede)}</p>
-            ${lead?`<div class="facts-line">${p.facts.slice(0,2).concat([p.facts[3]]).map(([k,v])=>`<div><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join("")}</div>`:""}
-          </div>
-        </a>`}).join("")}
-    </div>
+  <section class="wrap group" aria-labelledby="g-games">
+    <div class="group-head"><h2 id="g-games">Games</h2><p>${games.length} case studies on mobile, PC and VR</p></div>
+    <div class="grid">${games.map((p,i)=>card(p,i,false)).join("")}</div>
+  </section>
+  <section class="wrap group" aria-labelledby="g-product">
+    <div class="group-head"><h2 id="g-product">Product</h2><p>${product.length} case studies for iFood, on web and mobile</p></div>
+    <div class="grid product">${product.map((p,i)=>card(p,i+games.length,true)).join("")}</div>
   </section>`;
-  app.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{
-    filter=b.dataset.filter;try{localStorage.setItem("jj-filter3",filter)}catch(e){}
-    home();document.getElementById("tab-"+filter).focus();
-  }));
 }
 
 function project(p){
@@ -472,29 +491,70 @@ function project(p){
   app.querySelectorAll("[data-zoom]").forEach(b=>b.addEventListener("click",()=>openViewer(b.dataset.zoom,b.dataset.cap)));
 }
 
+const XP=[
+ {co:"Wildlife Studios",role:"Visual Designer",team:"Zooba",when:"Jul 2026 – Present",
+  points:["Visual design for Zooba, a free-to-play mobile battle royale."]},
+ {co:"Instituto de Pesquisas Eldorado",role:"Senior UI/UX Designer",team:"Campinas, SP",when:"Feb 2023 – Jun 2026",
+  points:["Led a team of <b>4 designers</b>, overseeing visual identity and art direction of educational games for mobile, desktop and VR.",
+   "Designed interfaces, wireframes, HUD, icons and other visual elements.",
+   "Worked with developers, 3D artists and educators to integrate learning content in Unity.",
+   "Instructor and mentor at the Apple Developer Academy residency for mobile and embedded game projects: Design Thinking, Design Sprint, HIG and art fundamentals."],
+  cases:[["sprint-sailors","Sprint Sailors"],["hack-and-lock","Hack&Lock"]]},
+ {co:"Meso Lab Inc.",role:"Sr. UX/UI Designer",team:"Contract, Canada",when:"2024",
+  points:["UX/UI for a fantasy gacha game with collectible cats: mechanics and metrics with product, wireframes, prototypes, HUD and style guides."],
+  cases:[["gacha-game","Unreleased Gacha Game"]]},
+ {co:"iFood",role:"UI/UX Designer",team:"São Paulo, SP",when:"Jan 2021 – Feb 2023",
+  points:["Redesigned the restaurant promotions platform: <b>+21%</b> organic investment and <b>22k</b> restaurants joined, new and returning.",
+   "Ran <b>40+</b> user research interviews to guide the platform.",
+   "Loyalty team, focused on acquisition and retention. Main designer on iFood Club and iFood Monthly Subscription.",
+   "Ambassador of The Design Zone (TDZ), organizing monthly activities for 70+ designers.",
+   "Selected for Movile Group's Mobile Dream program for career, management and development training."],
+  cases:[["ifood-promotion-platform","Promotion Platform"],["ifood-1-year-free","1 Year Free"]]},
+ {co:"Apple Developer Academy",role:"UX/UI Design Intern",team:"Campinas, SP",when:"Feb 2019 – Dec 2020",
+  points:["Designed, built and published <b>7 apps</b> on the App Store.",
+   "Challenge-Based Learning, agile methods and interface reviews based on Apple's Human Interface Guidelines."]},
+ {co:"Independent",role:"Art Director and UX/UI Designer",team:"Personal games",when:"2025",
+  points:["Two games made with a small team and published on itch.io."],
+  cases:[["weather-inc","Weather Inc"],["twvc","The Weird Vacuum Company"]]}
+];
+
 function about(){
   app.innerHTML=`<section class="wrap about">
-    <h1>About</h1>
     <div>
-      <p class="intro">Senior UX/UI designer and art director. I design game and product interfaces end to end, from goals and user flows with stakeholders to high-fidelity UI, visual identity and the specs developers build from.</p>
+      <h1>About</h1>
+      <p class="side-note">Visual and UX/UI designer for games and digital products.</p>
+    </div>
+    <div>
+      <p class="intro">I'm <b>Júlio John</b>, a visual and UX/UI designer with 7+ years across mobile, PC and VR. Today I'm a Visual Designer on Zooba at Wildlife Studios.</p>
+      <p class="intro">Before that I led UI/UX and art direction for educational games at Instituto de Pesquisas Eldorado, designed growth and loyalty products at iFood, and started at the Apple Developer Academy.</p>
+
+      <h2>Experience</h2>
+      <ol class="timeline">
+        ${XP.map(x=>`<li>
+          <div class="co">${esc(x.co)}</div>
+          <div class="when">${esc(x.when)}</div>
+          <div class="role">${esc(x.role)} <span>· ${esc(x.team)}</span></div>
+          <ul>${x.points.map(t=>`<li>${t}</li>`).join("")}</ul>
+          ${x.cases?`<div class="cases">${x.cases.map(([id,n])=>`<a class="link" href="#${id}">${esc(n)}</a>`).join("")}</div>`:""}
+        </li>`).join("")}
+      </ol>
+
       <h2>How I work</h2>
       <ol class="steps">
         <li><span><strong>Define the goal.</strong> Objectives, metrics and the player or user journey, agreed with stakeholders and product.</span></li>
-        <li><span><strong>Structure and test.</strong> Low-fidelity wireframes and interactive prototypes, often several layouts side by side.</span></li>
+        <li><span><strong>Structure and test.</strong> Wireframes, prototypes and user research, often several layouts side by side.</span></li>
         <li><span><strong>Craft the interface.</strong> High-fidelity UI, HUD, icons and illustration in one visual language.</span></li>
         <li><span><strong>Hand off with care.</strong> Style guides and visual specs so the build matches the design.</span></li>
-        <li><span><strong>Grow the team.</strong> Art direction, feedback reviews and mentorship for junior designers.</span></li>
+        <li><span><strong>Grow the team.</strong> Art direction, feedback reviews, mentorship and workshops.</span></li>
       </ol>
-      <h2>Experience highlights</h2>
-      <ul class="xp">
-        ${[["sprint-sailors","Eldorado Research Institute","Senior UX/UI Designer and Art Director on Sprint Sailors","2023"],
-           ["gacha-game","Meso Lab Inc. (Canada)","Sr. UX/UI Designer on an unreleased gacha game","2024"],
-           ["hack-and-lock","Instituto de Pesquisas Eldorado","Lead UX and Visual Designer on Hack&Lock (VR)","2024"],
-           ["ifood-promotion-platform","iFood","UX/UI Designer on the promotion platform and campaigns",""],
-           ["weather-inc","Independent","Art Director and UX/UI Designer on Weather Inc and TWVC","2025"]]
-          .map(([id,co,r,y])=>`<li><a href="#${id}"><b>${esc(co)}</b><span>${y}</span><em>${esc(r)}</em></a></li>`).join("")}
-      </ul>
-      <div class="inline-links" style="margin-top:28px">
+
+      <h2>Skills and tools</h2>
+      <div class="kit">
+        <div><h3>Skills</h3><p>UX design, UI design, product design, visual design, illustration, concept art</p></div>
+        <div><h3>Tools</h3><p>Figma, Photoshop, Procreate, Blender, Maya, Unity</p></div>
+      </div>
+
+      <div class="inline-links" style="margin-top:36px">
         <a class="link" href="https://www.linkedin.com/in/juliojohn" target="_blank" rel="noopener">Full resume on LinkedIn</a>
         <button type="button" class="link" data-copy>Copy email</button>
       </div>
@@ -567,6 +627,7 @@ document.addEventListener("keydown",e=>{
 });
 current=location.hash.slice(1)||"work";render(current);
 </script>
+
 
 </body>
 </html>
