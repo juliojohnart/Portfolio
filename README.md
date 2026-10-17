@@ -21,3 +21,13 @@ Em um ou dois minutos o site fica no endereço que o GitHub mostrar nessa tela.
 ## Editar conteúdo
 
 Os projetos ficam no array `P` dentro do `<script>` do `index.html`: textos, resumo, legendas e lista de pranchas de cada caso.
+
+## Projetos iFood importados
+
+Galerias em WebP, com versões de 800 e 1600 pixels, e animação em MP4 local. As pranchas de apresentação que repetiam o resumo foram retiradas das galerias:
+
+- Promotion Platform (4 pranchas e 1 vídeo): https://juliojohn.com/projects/DLmnyG
+- 1 Year Free (3 pranchas): https://juliojohn.com/projects/4NyweY
+- Consumer Loyalty (3 pranchas): https://juliojohn.com/projects/Nqb9kg
+
+As imagens ficam em `w/` e o vídeo em `media/`.
