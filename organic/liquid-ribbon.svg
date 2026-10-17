@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 880" fill="none" role="img" aria-label="Escultura de vidro líquido verde e prateado">
+<defs>
+ <linearGradient id="outer" x1="40" y1="75" x2="1020" y2="790" gradientUnits="userSpaceOnUse"><stop stop-color="#001B24"/><stop offset=".13" stop-color="#5F8C91"/><stop offset=".25" stop-color="#DDF9F1"/><stop offset=".37" stop-color="#0F4B56"/><stop offset=".52" stop-color="#C3F0E7"/><stop offset=".67" stop-color="#11302E"/><stop offset=".79" stop-color="#93D7C7"/><stop offset=".94" stop-color="#E7F9FF"/><stop offset="1" stop-color="#235361"/></linearGradient>
+ <linearGradient id="inner" x1="190" y1="100" x2="850" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#9CCDD0" stop-opacity=".36"/><stop offset=".19" stop-color="#F0FFFF" stop-opacity=".89"/><stop offset=".3" stop-color="#1A5B66" stop-opacity=".62"/><stop offset=".54" stop-color="#D2FFF7" stop-opacity=".3"/><stop offset=".73" stop-color="#B8D7D5" stop-opacity=".91"/><stop offset="1" stop-color="#13494F" stop-opacity=".54"/></linearGradient>
+ <linearGradient id="shine" x1="250" y1="0" x2="930" y2="900" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF" stop-opacity=".03"/><stop offset=".18" stop-color="#FFFFFF" stop-opacity=".92"/><stop offset=".37" stop-color="#DEFFF6" stop-opacity=".08"/><stop offset=".63" stop-color="#FFFFFF" stop-opacity=".98"/><stop offset=".78" stop-color="#E5FFFF" stop-opacity=".06"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".76"/></linearGradient>
+ <radialGradient id="bubble" cx=".32" cy=".22" r=".83"><stop stop-color="#FFFFFF"/><stop offset=".13" stop-color="#C4FFF7"/><stop offset=".27" stop-color="#3F9B95"/><stop offset=".52" stop-color="#0B333B"/><stop offset=".7" stop-color="#DAFFFF"/><stop offset=".86" stop-color="#163942"/><stop offset="1" stop-color="#01151C"/></radialGradient>
+ <radialGradient id="aura"><stop stop-color="#6ED1B6" stop-opacity=".42"/><stop offset="1" stop-color="#285B69" stop-opacity="0"/></radialGradient>
+ <filter id="shadow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="28"/></filter>
+ <filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="7"/></filter>
+</defs>
+<ellipse cx="640" cy="440" rx="430" ry="400" fill="url(#aura)" opacity=".6"/>
+<path d="M168 51C442 -22 742 74 749 264c5 137-315 102-390 255-80 163 56 286 305 245 182-30 299-148 460-104" stroke="#000F1D" stroke-opacity=".55" stroke-width="177" stroke-linecap="round" filter="url(#shadow)"/>
+<path d="M168 51C442 -22 742 74 749 264c5 137-315 102-390 255-80 163 56 286 305 245 182-30 299-148 460-104" stroke="url(#outer)" stroke-width="144" stroke-linecap="round"/>
+<path d="M168 51C442 -22 742 74 749 264c5 137-315 102-390 255-80 163 56 286 305 245 182-30 299-148 460-104" stroke="url(#inner)" stroke-width="107" stroke-linecap="round"/>
+<path d="M179 5C448 -43 785 80 775 259c-12 176-345 103-407 269-57 150 39 250 288 213 185-26 284-135 468-117" stroke="url(#shine)" stroke-width="15" stroke-linecap="round" opacity=".78"/>
+<path d="M161 103C406 27 692 96 707 254c12 132-312 124-381 249-102 186 43 329 333 293 194-25 340-150 470-90" stroke="#D9FFF6" stroke-opacity=".51" stroke-width="8" stroke-linecap="round" filter="url(#soft)"/>
+<path d="M196 92C474 18 685 119 692 263" stroke="#FFFFFF" stroke-opacity=".56" stroke-width="5" stroke-linecap="round"/>
+<path d="M425 601C437 696 538 728 644 707" stroke="#EFFBFF" stroke-opacity=".68" stroke-width="6" stroke-linecap="round"/>
+<g><circle cx="1030" cy="194" r="65" fill="#00131E" opacity=".6" filter="url(#shadow)"/><circle cx="1023" cy="186" r="62" fill="url(#bubble)"/><ellipse cx="1002" cy="160" rx="24" ry="9" transform="rotate(-33 1002 160)" fill="#FFFFFF" opacity=".69"/><ellipse cx="1044" cy="218" rx="24" ry="8" transform="rotate(-39 1044 218)" fill="#C1FFFF" opacity=".29"/></g>
+<g><circle cx="236" cy="733" r="42" fill="url(#bubble)"/><ellipse cx="223" cy="715" rx="15" ry="6" transform="rotate(-29 223 715)" fill="#FFFFFF" opacity=".78"/></g>
+<g><circle cx="912" cy="822" r="24" fill="url(#bubble)"/><ellipse cx="908" cy="815" rx="9" ry="3" transform="rotate(-25 908 815)" fill="#FFFFFF" opacity=".8"/></g>
+</svg>
