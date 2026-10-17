@@ -245,7 +245,7 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 button[data-copy].copied{color:var(--ink)}
 .email button[data-copy].copied{background:var(--ink);color:var(--ground)}
 .email button[data-copy]{min-width:7.5em}
-/* Ambient. Three soft color fields drift behind the page, taken from the projects' own deep colors, under a fine static grain. Hovering a case on the home pulls the room toward that project's color; a case page settles into its palette. Cards tilt slightly toward the cursor. A slow skills marquee closes the intro. Pure CSS motion, no canvas. */
+/* Ambient. Three soft color fields drift behind the page, taken from the projects' own deep colors, under a fine static grain. Hovering a case on the home pulls the room toward that project's color; a case page settles into its palette. Cards tilt slightly toward the cursor. Pure CSS motion, no canvas. */
 @property --a1{syntax:"<color>";inherits:true;initial-value:#123a8c}
 @property --a2{syntax:"<color>";inherits:true;initial-value:#34103f}
 @property --a3{syntax:"<color>";inherits:true;initial-value:#0f3a2e}
@@ -268,15 +268,6 @@ body{background:transparent}
   .item:hover .thumb::after{opacity:1}
 }
 
-.hero>.marquee{max-width:none}
-.marquee{margin-top:48px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.marquee .track{display:flex;width:max-content;animation:slide 50s linear infinite}
-.marquee:hover .track{animation-play-state:paused}
-.marquee ul{display:flex;list-style:none;margin:0;padding:0}
-.marquee li{white-space:nowrap;color:var(--dim);font-size:15px;font-weight:600;font-stretch:112%;padding-right:32px;display:flex;align-items:center;gap:32px}
-.marquee li::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--rule)}
-@keyframes slide{to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.marquee .track{flex-wrap:wrap;width:auto}.marquee ul[aria-hidden]{display:none}.marquee ul{flex-wrap:wrap;row-gap:8px}.marquee{-webkit-mask-image:none;mask-image:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -713,13 +704,9 @@ if(fine.matches){
   app.addEventListener("pointerdown",e=>{const t=e.target.closest&&e.target.closest(".item .thumb");if(t)t.style.transform=""});
 }
 
-const SKILLS=["User flows","Wireframes","Interactive prototypes","Game HUD","Iconography","Visual identity","Character illustration","Style guides","Art direction","Mobile, PC and VR","Mentoring designers"];
 function enhance(id){
   const p=P.find(x=>x.id===id);
   p?amb(p.band,p.band,p.ink):amb(...HOME);
-  const links=app.querySelector(".hero .inline-links");
-  if(links){const li=SKILLS.map(s=>`<li>${esc(s)}</li>`).join("");
-    links.insertAdjacentHTML("afterend",`<div class="marquee" role="region" aria-label="Skills"><div class="track"><ul>${li}</ul><ul aria-hidden="true">${li}</ul></div></div>`)}
 }
 
 current=location.hash.slice(1)||"work";render(current);
