@@ -45,13 +45,30 @@ p,li{text-wrap:pretty}
 button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 
 /* Header */
-.head{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--ground);border-bottom:1px solid var(--rule)}
+/* Frosted bar over the ambient field: transparent at the top of the page, a hairline appears once content scrolls under it. Solid where backdrop blur is missing. */
+.head{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--ground);border-bottom:1px solid transparent;transition:border-color .3s,background-color .3s}
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .head{background:color-mix(in srgb,var(--ground) 62%,transparent);-webkit-backdrop-filter:blur(10px) saturate(160%);backdrop-filter:blur(10px) saturate(160%)}
+  .head.stuck{background:color-mix(in srgb,var(--ground) 78%,transparent)}
+}
+.head.stuck{border-bottom-color:var(--rule)}
+.head.open{background:var(--ground)}
 .head .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
-.mark{text-decoration:none;font-weight:750;font-size:18px;font-stretch:112%;letter-spacing:-.01em}
+.mark{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:750;font-size:18px;font-stretch:112%;letter-spacing:-.01em;min-width:0}
+.mark i{flex:none;width:9px;height:9px;border-radius:50%;background:#7db4ff;box-shadow:0 0 8px currentColor;color:#7db4ff;animation:dot 16s linear infinite;transition:transform .3s var(--ease)}
+.mark:hover i{transform:scale(1.35)}
+.on-case .mark i{animation:none;background:var(--ink);color:var(--ink)}
+@keyframes dot{0%,100%{background:#7db4ff;color:#7db4ff}25%{background:#ff7cbd;color:#ff7cbd}50%{background:#4ff0b4;color:#4ff0b4}75%{background:#ffc94d;color:#ffc94d}}
+.mark small{font-weight:500;font-size:14px;font-stretch:100%;letter-spacing:0;color:var(--dim);padding-left:12px;border-left:1px solid var(--rule);white-space:nowrap}
+@media (max-width:900px){.mark small{display:none}}
 .nav{display:flex;align-items:center;gap:28px;font-size:15px}
-.nav a,.nav button{background:none;border:0;padding:6px 0;font:inherit;color:var(--dim);text-decoration:none;cursor:pointer;border-bottom:1.5px solid transparent;transition:color .15s,border-color .15s}
+.nav a,.nav button{position:relative;background:none;border:0;padding:6px 0;font:inherit;color:var(--dim);text-decoration:none;cursor:pointer;transition:color .15s}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+.nav a:hover::after,.nav a[aria-current="page"]::after{transform:scaleX(1);transform-origin:left}
 .nav a:hover,.nav button:hover{color:var(--text)}
-.nav a[aria-current="page"]{color:var(--text);border-bottom-color:var(--text)}
+.nav a[aria-current="page"]{color:var(--text)}
+.nav button[data-contact]{padding:8px 16px;border:1px solid var(--rule);border-radius:999px;color:var(--text);background:color-mix(in srgb,var(--text) 5%,transparent);transition:background-color .2s,color .2s,border-color .2s}
+.nav button[data-contact]:hover{background:var(--text);border-color:var(--text);color:var(--ground)}
 .burger{display:none;background:none;border:0;padding:10px;margin-right:-10px;cursor:pointer}
 .burger i{display:block;width:22px;height:2px;background:var(--text);margin:5px 0;transition:transform .2s var(--ease),opacity .2s}
 .burger[aria-expanded="true"] i:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -267,7 +284,7 @@ body{background:transparent}
 <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div><div class="grain" aria-hidden="true"></div>
 <header class="head">
   <div class="wrap bar">
-    <a class="mark" href="#work">Júlio John</a>
+    <a class="mark" href="#work"><i aria-hidden="true"></i>Júlio John<small>Visual and UX/UI Designer</small></a>
     <nav class="nav" aria-label="Main">
       <a href="#work" data-nav="work">Work</a>
       <a href="#about" data-nav="about">About</a>
@@ -475,7 +492,7 @@ function project(p){
   const d=p.details;
   const third=p.impact
     ?`<div><h3>Impact</h3><div class="impact">${p.impact.map(([v,l])=>`<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("")}</div></div>`
-    :`<div><h3>Goals</h3><ul>${p.goals.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
+    :p.goals?`<div><h3>Goals</h3><ul>${p.goals.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:"";
   app.innerHTML=`
   <div class="wrap">
     <header class="case-head">
@@ -610,12 +627,17 @@ viewer.addEventListener("close",()=>vimg.removeAttribute("src"));
 const toast=document.getElementById("toast");let tt;
 function say(m){toast.textContent=m;toast.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("show"),1800)}
 const burger=document.getElementById("burger"),drawer=document.getElementById("drawer");
-function closeDrawer(){drawer.hidden=true;burger.setAttribute("aria-expanded","false")}
-burger.addEventListener("click",()=>{drawer.hidden=!drawer.hidden;burger.setAttribute("aria-expanded",String(!drawer.hidden))});
+const head=document.querySelector(".head");
+function closeDrawer(){drawer.hidden=true;burger.setAttribute("aria-expanded","false");head.classList.remove("open")}
+burger.addEventListener("click",()=>{drawer.hidden=!drawer.hidden;burger.setAttribute("aria-expanded",String(!drawer.hidden));head.classList.toggle("open",!drawer.hidden)});
 document.addEventListener("click",e=>{
   if(e.target.closest("[data-copy]")){try{navigator.clipboard.writeText(EMAIL).then(()=>say("Email copied"),()=>say(EMAIL))}catch(err){say(EMAIL)}}
   if(e.target.closest("[data-contact]")){closeDrawer();document.getElementById("contact").scrollIntoView({behavior:reduce.matches?"auto":"smooth"})}
 });
+
+/* Header hairline once content scrolls under it */
+const stick=()=>head.classList.toggle("stuck",scrollY>8);
+addEventListener("scroll",stick,{passive:true});
 
 /* Reading progress on case pages */
 const bar=document.getElementById("progress");let onCase=false,tick=false;
@@ -626,10 +648,11 @@ let current=null;
 function render(id){
   const p=P.find(x=>x.id===id);
   closeDrawer();if(viewer.open)viewer.close();
-  onCase=!!p;bar.style.transform="scaleX(0)";
+  onCase=!!p;bar.style.transform="scaleX(0)";root.classList.toggle("on-case",onCase);
   if(!p){root.style.setProperty("--ink","#eeece7");root.style.setProperty("--band","#26262c")}
   document.querySelectorAll("[data-nav]").forEach(a=>{const on=(a.dataset.nav==="about")===(id==="about");on?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current")});
-  if(p)project(p);else if(id==="about")about();else home();
+  /* A content error in one case must never leave a blank or stuck page: fall back to the home list */
+  try{if(p)project(p);else if(id==="about")about();else home()}catch(err){console.error(err);home()}
   document.title=p?`${p.name} · Júlio John`:id==="about"?"About · Júlio John":"Júlio John Portfolio";
 }
 function go(id,{fromThumb=null,push=true}={}){
