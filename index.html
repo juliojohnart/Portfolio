@@ -173,22 +173,31 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 @media (max-width:1340px){.side{display:none}}
 
 /* About */
-.about{padding-block:64px 72px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:48px}
+.about{padding-block:64px 72px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);gap:48px}
 .about h1{margin:0;font-weight:760;font-stretch:115%;font-size:clamp(38px,5vw,60px);line-height:1;letter-spacing:-.025em}
-.about .intro{margin:0 0 8px;font-size:19px;color:#d8d6d0;max-width:58ch}
-.about h2{margin:40px 0 14px;font-weight:700;font-stretch:112%;font-size:17px}
-.steps{list-style:none;padding:0;margin:0;display:grid;gap:14px;counter-reset:s}
+.about .side-note{margin:18px 0 0;color:var(--dim);font-size:15px;max-width:30ch}
+.about .intro{margin:0 0 12px;font-size:19px;line-height:1.6;color:#d8d6d0;max-width:60ch}
+.about .intro b{color:var(--text);font-weight:600}
+.about h2{margin:48px 0 16px;font-weight:700;font-stretch:112%;font-size:20px;line-height:1.2}
+.timeline{list-style:none;padding:0;margin:0;border-top:1px solid var(--rule)}
+.timeline > li{padding:22px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 20px}
+.timeline .co{font-weight:700;font-stretch:105%;font-size:18px}
+.timeline .when{color:var(--dim);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:3px}
+.timeline .role{grid-column:1/-1;color:var(--text);font-size:15.5px}
+.timeline .role span{color:var(--dim)}
+.timeline ul{grid-column:1/-1;margin:10px 0 0;padding-left:18px;color:var(--dim);font-size:15px}
+.timeline ul li{margin-bottom:6px}
+.timeline ul b{color:var(--text);font-weight:600}
+.timeline .cases{grid-column:1/-1;margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px}
+.steps{list-style:none;padding:0;margin:0;display:grid;gap:12px;counter-reset:s}
 .steps li{counter-increment:s;display:grid;grid-template-columns:2em minmax(0,1fr);gap:8px;color:var(--dim)}
 .steps li::before{content:counter(s);font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
 .steps strong{color:var(--text);font-weight:600}
-.xp{list-style:none;padding:0;margin:0;border-top:1px solid var(--rule)}
-.xp li{border-bottom:1px solid var(--rule)}
-.xp a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;padding:14px 0;text-decoration:none}
-.xp b{font-weight:600}
-.xp span{color:var(--dim);font-variant-numeric:tabular-nums}
-.xp em{grid-column:1/-1;color:var(--dim);font-style:normal;font-size:15px}
-.xp a:hover b{text-decoration:underline;text-underline-offset:4px}
-@media (max-width:860px){.about{grid-template-columns:1fr;gap:16px;padding-block:44px 56px}}
+.kit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.kit h3{margin:0 0 8px;font-size:15px;font-weight:600;color:var(--dim)}
+.kit p{margin:0;font-size:16px;line-height:1.7}
+@media (max-width:860px){.about{grid-template-columns:1fr;gap:16px;padding-block:44px 56px}.about .side-note{display:none}}
+@media (max-width:520px){.timeline > li{grid-template-columns:1fr}.timeline .when{padding-top:0;order:-1}.kit{grid-template-columns:1fr}}
 
 /* Contact */
 .contact{border-top:1px solid var(--rule)}
@@ -241,13 +250,13 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 
 <section class="contact" id="contact" aria-label="Contact">
   <div class="wrap">
-    <p>Open to senior UX/UI and art direction roles in games and digital products.</p>
+    <p>Want to talk about game UI, visual design or a project? Write to me.</p>
     <div class="email"><code id="mail">julio_john@hotmail.com.br</code><button type="button" data-copy>Copy email</button></div>
     <div class="inline-links" style="margin-bottom:48px">
       <a class="link" href="https://www.linkedin.com/in/juliojohn" target="_blank" rel="noopener">LinkedIn</a>
       <a class="link" href="https://juliojohn.itch.io" target="_blank" rel="noopener">Playable games on itch.io</a>
     </div>
-    <div class="foot"><span>Júlio John © All rights reserved</span><span>Senior UX/UI Designer and Art Director</span></div>
+    <div class="foot"><span>Júlio John © All rights reserved</span><span>Visual Designer at Wildlife Studios</span></div>
   </div>
 </section>
 
@@ -358,24 +367,27 @@ const P=[
     ["Career Mentorship",["Career mentorship with 4 junior designers (2 UI/UX Designers and 2 Visual Designers).","Support in setting career goals and planning professional development.","Assist designers in building and enhancing their professional portfolios.","Organize and conduct workshops and training sessions on topics such as UI, design, perspective and digital painting."]]]}},
 
  {id:"ifood-promotion-platform",name:"iFood Promotion Platform",cat:"product",ink:"#ff7d80",band:"#5e1117",
-  kind:"Web and mobile product",discipline:"Product UX/UI",cover:["cover-ifood-platform",635],
+  kind:"Web and mobile product, 2022",discipline:"Product UX/UI",cover:["cover-ifood-platform",635],
   lede:"Redesign of the platform restaurants use to invest in promotions on iFood.",
-  facts:[["Role","UX/UI Designer"],["Company","iFood"],["Duration","6 months"],["Platform","Web and mobile"]],
+  facts:[["Role","UX/UI Designer"],["Company","iFood"],["Year","2022"],["Duration","6 months"],["Platform","Web and mobile"],["Design lead","Patricia Panza"]],
   problem:"Design an investment platform that is easy to engage with, transparent to use and scalable for the product, while also ensuring economic profitability for iFood.",
-  contribution:["Promotion discovery tailored to each restaurant's goals","Performance view of current promotions","Responsive layouts for desktop and phone"],
+  contribution:["Ran 40+ user research interviews to guide the platform","Wireframes and prototypes for promotion discovery by goal","Performance view of current promotions, on desktop and phone"],
+  impact:[["+21%","organic investment from restaurants after the redesign"],["22k","restaurants joined promotions, new and returning"]],
   goals:["Help restaurants grow","Offer better promotions to users and restaurants","Financial efficiency for iFood"],
   boards:[["ifood-platform-hero",1071,600,"Promotions","Restaurants find promotions by goal: attract new customers, retain existing ones, boost sales, and track what is running."]],
-  details:{intro:["Redesign of iFood's promotion platform for partner restaurants: easily find the best promotions tailored to each restaurant's goals, helping to attract new customers, retain existing ones, boost sales, and monitor the performance of current promotions."]}},
+  details:{intro:["A UX/UI project for iFood in 2022.","Redesign of iFood's promotion platform for partner restaurants: easily find the best promotions tailored to each restaurant's goals, helping to attract new customers, retain existing ones, boost sales, and monitor the performance of current promotions."],
+   credits:[["UX/UI Design Lead","Patricia Panza","https://www.linkedin.com/in/patypanza"],["UX/UI Designer","Júlio John"]]}},
 
  {id:"ifood-1-year-free",name:"iFood 1 Year Free",cat:"product",ink:"#ffc94d",band:"#8d1a1f",
-  kind:"Mobile campaign",discipline:"Product UX/UI",cover:["ifood-year-hero",1071],
+  kind:"Mobile campaign, 2022",discipline:"Product UX/UI",cover:["ifood-year-hero",1071],
   lede:"Opt-in experience for the giveaway that celebrated iFood's 10th anniversary.",
-  facts:[["Role","UX/UI Designer"],["Company","iFood"],["Duration","4 weeks"],["Platform","Mobile app"]],
+  facts:[["Role","UX/UI Designer"],["Company","iFood"],["Year","2022"],["Duration","4 weeks"],["Platform","Mobile app"]],
   problem:"A promotional giveaway to celebrate iFood's 10th anniversary, where winners get one year of free iFood food.",
   contribution:["Opt-in screen with all rules in clear, festive language","Campaign visual applied to the app experience"],
   goals:["Increase engagement","Grow the number of customers","Retain new customers"],
   boards:[["ifood-year-hero",1071,600,"Promotion opt-in","Engaging language and a festive design present every rule while celebrating the occasion."]],
-  details:{intro:["Presented with engaging language and a festive design, the opt-in screen shows all rules and aims to captivate users while celebrating the occasion."]}}
+  details:{intro:["A UX/UI project for iFood in 2022.","Presented with engaging language and a festive design, the opt-in screen shows all rules and aims to captivate users while celebrating the occasion."],
+   credits:[["UX/UI Design Lead","Ricardo Tedeschi","https://br.linkedin.com/in/ricardo-tedeschi"],["Sr. Visual Designer","Bruno Okada","https://brunookada.com"],["UX/UI Designer","Júlio John"]]}}
 ];
 
 const app=document.getElementById("app");
@@ -402,7 +414,7 @@ function home(){
   app.innerHTML=`
   <section class="wrap hero">
     <h1>Interfaces for games and digital products.</h1>
-    <p>I'm <b>Júlio John</b>, a senior UX/UI designer and art director. I take projects from user flows and wireframes to high-fidelity UI, visual identity and the specs developers build from, on mobile, PC and VR.</p>
+    <p>I'm <b>Júlio John</b>, a visual and UX/UI designer with 7+ years across mobile, PC and VR, currently a Visual Designer on Zooba at Wildlife Studios. Before that, iFood and Instituto de Pesquisas Eldorado.</p>
     <div class="inline-links">
       <button type="button" class="link" data-copy>Copy email</button>
       <a class="link" href="https://www.linkedin.com/in/juliojohn" target="_blank" rel="noopener">LinkedIn</a>
@@ -479,29 +491,70 @@ function project(p){
   app.querySelectorAll("[data-zoom]").forEach(b=>b.addEventListener("click",()=>openViewer(b.dataset.zoom,b.dataset.cap)));
 }
 
+const XP=[
+ {co:"Wildlife Studios",role:"Visual Designer",team:"Zooba",when:"2026 – Present",
+  points:["Visual design for Zooba, a free-to-play mobile battle royale."]},
+ {co:"Instituto de Pesquisas Eldorado",role:"Senior UI/UX Designer",team:"Campinas, SP",when:"Feb 2023 – 2026",
+  points:["Led a team of <b>4 designers</b>, overseeing visual identity and art direction of educational games for mobile, desktop and VR.",
+   "Designed interfaces, wireframes, HUD, icons and other visual elements.",
+   "Worked with developers, 3D artists and educators to integrate learning content in Unity.",
+   "Instructor and mentor at the Apple Developer Academy residency for mobile and embedded game projects: Design Thinking, Design Sprint, HIG and art fundamentals."],
+  cases:[["sprint-sailors","Sprint Sailors"],["hack-and-lock","Hack&Lock"]]},
+ {co:"Meso Lab Inc.",role:"Sr. UX/UI Designer",team:"Contract, Canada",when:"2024",
+  points:["UX/UI for a fantasy gacha game with collectible cats: mechanics and metrics with product, wireframes, prototypes, HUD and style guides."],
+  cases:[["gacha-game","Unreleased Gacha Game"]]},
+ {co:"iFood",role:"UI/UX Designer",team:"São Paulo, SP",when:"Jan 2021 – Feb 2023",
+  points:["Redesigned the restaurant promotions platform: <b>+21%</b> organic investment and <b>22k</b> restaurants joined, new and returning.",
+   "Ran <b>40+</b> user research interviews to guide the platform.",
+   "Loyalty team, focused on acquisition and retention. Main designer on iFood Club and iFood Monthly Subscription.",
+   "Ambassador of The Design Zone (TDZ), organizing monthly activities for 70+ designers.",
+   "Selected for Movile Group's Mobile Dream program for career, management and development training."],
+  cases:[["ifood-promotion-platform","Promotion Platform"],["ifood-1-year-free","1 Year Free"]]},
+ {co:"Apple Developer Academy",role:"UX/UI Design Intern",team:"Campinas, SP",when:"Feb 2019 – Dec 2020",
+  points:["Designed, built and published <b>7 apps</b> on the App Store.",
+   "Challenge-Based Learning, agile methods and interface reviews based on Apple's Human Interface Guidelines."]},
+ {co:"Independent",role:"Art Director and UX/UI Designer",team:"Personal games",when:"2025",
+  points:["Two games made with a small team and published on itch.io."],
+  cases:[["weather-inc","Weather Inc"],["twvc","The Weird Vacuum Company"]]}
+];
+
 function about(){
   app.innerHTML=`<section class="wrap about">
-    <h1>About</h1>
     <div>
-      <p class="intro">Senior UX/UI designer and art director. I design game and product interfaces end to end, from goals and user flows with stakeholders to high-fidelity UI, visual identity and the specs developers build from.</p>
+      <h1>About</h1>
+      <p class="side-note">Visual and UX/UI designer for games and digital products.</p>
+    </div>
+    <div>
+      <p class="intro">I'm <b>Júlio John</b>, a visual and UX/UI designer with 7+ years across mobile, PC and VR. Today I'm a Visual Designer on Zooba at Wildlife Studios.</p>
+      <p class="intro">Before that I led UI/UX and art direction for educational games at Instituto de Pesquisas Eldorado, designed growth and loyalty products at iFood, and started at the Apple Developer Academy.</p>
+
+      <h2>Experience</h2>
+      <ol class="timeline">
+        ${XP.map(x=>`<li>
+          <div class="co">${esc(x.co)}</div>
+          <div class="when">${esc(x.when)}</div>
+          <div class="role">${esc(x.role)} <span>· ${esc(x.team)}</span></div>
+          <ul>${x.points.map(t=>`<li>${t}</li>`).join("")}</ul>
+          ${x.cases?`<div class="cases">${x.cases.map(([id,n])=>`<a class="link" href="#${id}">${esc(n)}</a>`).join("")}</div>`:""}
+        </li>`).join("")}
+      </ol>
+
       <h2>How I work</h2>
       <ol class="steps">
         <li><span><strong>Define the goal.</strong> Objectives, metrics and the player or user journey, agreed with stakeholders and product.</span></li>
-        <li><span><strong>Structure and test.</strong> Low-fidelity wireframes and interactive prototypes, often several layouts side by side.</span></li>
+        <li><span><strong>Structure and test.</strong> Wireframes, prototypes and user research, often several layouts side by side.</span></li>
         <li><span><strong>Craft the interface.</strong> High-fidelity UI, HUD, icons and illustration in one visual language.</span></li>
         <li><span><strong>Hand off with care.</strong> Style guides and visual specs so the build matches the design.</span></li>
-        <li><span><strong>Grow the team.</strong> Art direction, feedback reviews and mentorship for junior designers.</span></li>
+        <li><span><strong>Grow the team.</strong> Art direction, feedback reviews, mentorship and workshops.</span></li>
       </ol>
-      <h2>Experience highlights</h2>
-      <ul class="xp">
-        ${[["sprint-sailors","Eldorado Research Institute","Senior UX/UI Designer and Art Director on Sprint Sailors","2023"],
-           ["gacha-game","Meso Lab Inc. (Canada)","Sr. UX/UI Designer on an unreleased gacha game","2024"],
-           ["hack-and-lock","Instituto de Pesquisas Eldorado","Lead UX and Visual Designer on Hack&Lock (VR)","2024"],
-           ["ifood-promotion-platform","iFood","UX/UI Designer on the promotion platform and campaigns",""],
-           ["weather-inc","Independent","Art Director and UX/UI Designer on Weather Inc and TWVC","2025"]]
-          .map(([id,co,r,y])=>`<li><a href="#${id}"><b>${esc(co)}</b><span>${y}</span><em>${esc(r)}</em></a></li>`).join("")}
-      </ul>
-      <div class="inline-links" style="margin-top:28px">
+
+      <h2>Skills and tools</h2>
+      <div class="kit">
+        <div><h3>Skills</h3><p>UX design, UI design, product design, visual design, illustration, concept art</p></div>
+        <div><h3>Tools</h3><p>Figma, Photoshop, Procreate, Blender, Maya, Unity</p></div>
+      </div>
+
+      <div class="inline-links" style="margin-top:36px">
         <a class="link" href="https://www.linkedin.com/in/juliojohn" target="_blank" rel="noopener">Full resume on LinkedIn</a>
         <button type="button" class="link" data-copy>Copy email</button>
       </div>
@@ -574,6 +627,7 @@ document.addEventListener("keydown",e=>{
 });
 current=location.hash.slice(1)||"work";render(current);
 </script>
+
 
 </body>
 </html>
