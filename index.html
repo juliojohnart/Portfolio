@@ -91,7 +91,7 @@ button.link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
 
 .item{display:flex;flex-direction:column;gap:14px;text-decoration:none;min-width:0}
 .item .thumb{aspect-ratio:1/1;overflow:hidden;background:var(--raised);max-width:100%}
-.grid.product .thumb{aspect-ratio:16/9}
+.grid.product .thumb{aspect-ratio:1/1}
 .item .thumb img{width:100%;height:100%;object-fit:cover;transition:filter .2s}
 .item:hover .thumb img{filter:brightness(1.08)}
 .item h3{margin:0;font-weight:650;font-stretch:105%;font-size:20px;line-height:1.2;letter-spacing:-.005em;transition:color .15s}
@@ -328,7 +328,7 @@ const SV={
 /* ink = bright project accent, band = deep project color. Board: [file, width, height, title, caption] */
 const P=[
  {id:"twvc",name:"The Weird Vacuum Company",cat:"games",ink:"#4ff0b4",band:"#0f3a2e",
-  kind:"Co-op PC game, 2025, playable",discipline:"Game art and UX/UI",cover:["cover-twvc",635],
+  kind:"Co-op PC game, 2025",discipline:"Game art and UX/UI",cover:["cover-twvc",635],
   lede:"A co-op multiplayer game where cleaning robots bring order to chaotic homes.",
   facts:[["Role","Art Director and UX/UI Designer"],["Year","2025"],["Platform","PC (itch.io)"],["Mode","Co-op multiplayer"],["Team","2 people"]],
   problem:"Let players set up a match, gather a team and jump into the cleaning chaos without friction, and understand actions and objectives through clear in-game feedback.",
@@ -346,7 +346,7 @@ const P=[
    credits:[["UX/UI and Art Direction","Júlio John"],["Game Design and Programming","Geovana Contine","https://www.linkedin.com/in/geovanacontine/"]]}},
 
  {id:"weather-inc",name:"Weather Inc",cat:"games",ink:"#9fe3e6",band:"#244a4e",
-  kind:"PC game, 2025, playable",discipline:"Game UX/UI and art direction",cover:["cover-weather",635],
+  kind:"PC game, 2025",discipline:"Game UX/UI and art direction",cover:["cover-weather",635],
   lede:"Run a chaotic forecasting office where quirky employees and strange signs predict the weather.",
   facts:[["Role","Art Director and UX/UI Designer"],["Type","Personal project"],["Year","2025"],["Platform","PC (itch.io)"],["Team","3 people"]],
   problem:"Make deduction from bizarre clues readable and fun, so players can connect patterns and lock in a forecast with style and instinct.",
@@ -422,7 +422,7 @@ const P=[
     ["Career Mentorship",["Career mentorship with 4 junior designers (2 UI/UX Designers and 2 Visual Designers).","Support in setting career goals and planning professional development.","Assist designers in building and enhancing their professional portfolios.","Organize and conduct workshops and training sessions on topics such as UI, design, perspective and digital painting."]]]}},
 
  {id:"ifood-promotion-platform",name:"iFood Promotion Platform",cat:"product",ink:"#ff7d80",band:"#5e1117",
-  kind:"Web and mobile product, 2022",discipline:"Product UX/UI",cover:["cover-ifood-platform",635],
+  kind:"Web and mobile product, 2022",discipline:"Product UX/UI",cover:["cover-ifood-platform",635],preview:["cover-ifood-platform-square",400,400],
   lede:"Redesign of the platform restaurants use to invest in promotions on iFood.",
   facts:[["Role","UX/UI Designer"],["Company","iFood"],["Year","2022"],["Duration","6 months"],["Platform","Web and mobile"],["Team","2 people"]],
   problem:"Design an investment platform that is easy to engage with, transparent to use and scalable for the product, while also ensuring economic profitability for iFood.",
@@ -439,7 +439,7 @@ const P=[
    credits:[["UX/UI Design Lead","Patricia Panza","https://www.linkedin.com/in/patypanza"],["UX/UI Designer","Júlio John"]]}},
 
  {id:"ifood-1-year-free",name:"iFood 1 Year Free",cat:"product",ink:"#ffc94d",band:"#8d1a1f",
-  kind:"Mobile campaign, 2022",discipline:"Product UX/UI",cover:["ifood-year-hero",1071],
+  kind:"Mobile campaign, 2022",discipline:"Product UX/UI",cover:["ifood-year-hero",1071],preview:["cover-ifood-year-square",400,400],
   lede:"Opt-in experience for the giveaway that celebrated iFood's 10th anniversary.",
   facts:[["Role","UX/UI Designer"],["Company","iFood"],["Year","2022"],["Duration","4 weeks"],["Platform","Mobile app"],["Team","2 people"]],
   problem:"A promotional giveaway to celebrate iFood's 10th anniversary, where winners get one year of free iFood food.",
@@ -453,7 +453,7 @@ const P=[
    credits:[["UX/UI Design Lead","Ricardo Tedeschi","https://br.linkedin.com/in/ricardo-tedeschi"],["Sr. Visual Designer","Bruno Okada","https://brunookada.com"],["UX/UI Designer","Júlio John"]]}},
 
  {id:"ifood-consumer-loyalty",name:"iFood Consumer Loyalty",cat:"product",ink:"#ff7d80",band:"#5e1117",
-  kind:"Mobile product, 2021",discipline:"Product UX/UI",cover:["cover-ifood-loyalty",635],preview:["cover-ifood-loyalty",635,635],
+  kind:"Mobile product, 2021",discipline:"Product UX/UI",cover:["cover-ifood-loyalty",635],preview:["cover-ifood-loyalty-square",400,400],
   lede:"A subscription experience for recurring discounts and delivery benefits on iFood.",
   facts:[["Role","UX/UI Designer"],["Company","iFood"],["Year","2021"],["Duration","5 months"],["Platform","Mobile app"],["Team","2 people"]],
   problem:"Implement and test a new subscription-based promotions feature in the iFood delivery app.",
